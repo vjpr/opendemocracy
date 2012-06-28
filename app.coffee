@@ -73,6 +73,7 @@ app.configure "production", ->
 # ------
 routes = new Routes
 app.get "/", routes.index
+app.get "/app", routes.app
 
 # Start web server
 # ----------------

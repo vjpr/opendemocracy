@@ -1,3 +1,5 @@
-#fb-login(style='float: left; margin-left: 5px')
-  %a(href='/auth/facebook' style='border: 0px')
-    %img(style='border: 0px' src='http://github.com/intridea/authbuttons/raw/master/png/facebook_64.png')
+!= js('application')
+!= css('style')
+
+%h1 Express Bootstrap
+%a(href="/app") Login
