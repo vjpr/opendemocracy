@@ -4,6 +4,8 @@ I use this for every new Express project.
 
 ## Setup
 
+    heroku apps:create yourappname
+
 ### If you want Facebook Authentication
 
 Add to `/etc/hosts`

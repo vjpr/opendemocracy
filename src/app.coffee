@@ -15,9 +15,9 @@ MongoStore = require('connect-mongo')(express)
 Q = require 'q'
 
 # App dependencies
-routes = require("./src/routes")
-Model = require('./src/model').Model
-Routes = require('./src/routes').Routes
+routes = require("./routes")
+{Model} = require('./model')
+{Routes} = require('./routes')
 
 # Init db layer
 # -------------
