@@ -1,3 +1,16 @@
-/assets/*
+# Specify files which do not require a server restart when changed.
+
+# Common
 /.git/*
-/builtAssets/*
+/tmp/*
+/test/*
+/views/*
+
+# Assets
+/app/assets/*
+/vendor/assets/*
+/lib/assets/*
+
+# Other
+/compiled/*
+/config/*
