@@ -1,6 +1,10 @@
 !!!
 html
   head
-    title= @title
+    title= title
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js')
-  body!= @body
+    script(src='/socket.io/socket.io.js')
+    != js('application.js')
+    != css('style.css')
+  body
+    block main

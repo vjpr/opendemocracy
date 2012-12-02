@@ -91,6 +91,11 @@ routes = new Routes
 app.get "/", routes.index
 app.get "/app", routes.app
 
+# Locals
+# ------
+
+app.locals title: 'Express Bootstrap'
+
 # Start web server
 # ----------------
 server = require('http').createServer app
