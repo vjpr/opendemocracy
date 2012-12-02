@@ -1,6 +1,10 @@
+debug:
+
+	nodemon --watch src --watch lib --watch app.js --debug app.js
+
 run:
 
-	nodemon --watch src --watch app.js --debug app.js
+	nodemon --watch src --watch lib --watch app.js app.js
 
 compile:
 
@@ -14,7 +18,7 @@ debug-inspector:
 
 	node-inspector &
 
-debug:
+debug1:
 
 	node --debug app
 
@@ -34,4 +38,4 @@ watch:
 
 	guard
 
-.PHONY: test testfe run watch prod debug-inspector debug debug-brk compile
+.PHONY: test testfe run debug watch prod debug-inspector debug1 debug-brk compile

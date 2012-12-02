@@ -1,18 +1,19 @@
 SITE_SECRET = 'yeah whatever'
-PORT = 3030
 
 # Vendor dependencies
 connect = require('connect')
 express = require 'express'
-hamlc = require 'haml-coffee'
 sio = require 'socket.io'
-assets = require 'connect-assets'
 path = require 'path'
 request = require 'request'
 mongooseAuth = require 'mongoose-auth'
 _ = require 'underscore'
 MongoStore = require('connect-mongo')(express)
 Q = require 'q'
+colors = require 'colors'
+require 'haml-coffee'
+cons = require 'consolidate'
+Assets = require 'live-assets'
 
 # App dependencies
 routes = require("./routes")
@@ -24,18 +25,35 @@ routes = require("./routes")
 model = new Model
 
 # Create app
-app = module.exports = express.createServer()
+app = express()
+app.set 'port', 3030
 
-# Connect-Assets
-# --------------
-assets.jsCompilers.hamlc =
-  match: /\.js$/
-  compileSync: (sourcePath, source) ->
-    assetName = path.basename(sourcePath, '.hamlc')
-    compiled = hamlc.template(source, assetName)
-    compiled
-app.use assets()
-app.register '.hamlc', hamlc
+# Live-Assets
+# -----------
+assets = new Assets
+  paths: [
+    'assets/app/js'
+    'assets/app/css'
+    'assets/vendor/js'
+    'assets/vendor/css'
+  ]
+  digest: false
+  expandTags: true
+  assetServePath: '/assets/'
+  remoteAssetsDir: '/'
+  usePrecompiledAssets: false
+  root: process.cwd()
+  files: ['application.js', 'style.css']
+
+# Precompile on every request.
+app.use (req, res, next) ->
+  env = assets.getEnvironment()
+  assets.precompileForDevelopment (err) =>
+    next()
+
+assets.middleware app
+
+app.engine 'jade', cons['jade']
 
 # Session Store
 # -------------
@@ -45,10 +63,10 @@ sessionStore = new MongoStore
 # Express Configuration
 # ---------------------
 app.configure ->
-  app.set "views", __dirname + "/views"
-  app.set "view engine", "hamlc"
+  app.set "views", process.cwd() + "/views"
+  app.set "view engine", "jade"
   app.use express.bodyParser()
-  app.use express.static(__dirname + "/public")
+  app.use express.static process.cwd() + "/public"
   app.use express.cookieParser()
   app.use express.session
     secret: SITE_SECRET
@@ -57,8 +75,6 @@ app.configure ->
   app.use express.methodOverride()
   app.use mongooseAuth.middleware()
   #app.use app.router
-
-mongooseAuth.helpExpress app
 
 app.configure "development", ->
   app.use express.errorHandler(
@@ -77,12 +93,13 @@ app.get "/app", routes.app
 
 # Start web server
 # ----------------
-app.listen PORT
-console.log "Express server listening on port %d in %s mode", app.address().port, app.settings.env
+server = require('http').createServer app
+server.listen app.get('port')
+console.log "Express server listening on port #{app.get('port').toString().green.bold} in #{app.get('env')} mode"
 
 # Socket.io
 # ---------
-io = sio.listen app
+io = sio.listen server
 io.set 'log level', 1
 io.set 'authorization', (data, accept) ->
   if data.headers.cookie

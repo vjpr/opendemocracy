@@ -7,9 +7,10 @@
 /views/*
 
 # Assets
-/app/assets/*
-/vendor/assets/*
-/lib/assets/*
+/assets/*
+#/app/assets/*
+#/vendor/assets/*
+#/lib/assets/*
 
 # Other
 /compiled/*

@@ -4,11 +4,12 @@
   , "private": true
   , "dependencies": {
       "connect": "1.x"
-    , "express": "2.5.8"
+    , "express": "3.x"
     , "jade": "*"
     , "coffee-script": "*"
-    , "mongoose": "*"
-    , "mongoose-auth": "*"
+    , "everyauth": ">=0.3.1"
+    , "mongoose": ">= 3.4.0"
+    , "mongoose-auth": ">= 0.0.12"
     , "imap": "*"
     , "connect-assets": "*"
     , "underscore": "*"
@@ -17,15 +18,19 @@
     , "mailparser": "*"
     , "mimelib": "*"
     , "socket.io": "*"
-    , "everyauth": "*"
     , "connect-mongo": "*"
     , "request": "*"
     , "cookie": "*"
     , "underscore": "*"
     , "q": "*"
+    , "colors": "*"
+    , "consolidate": ">= 0.5.0"
   }
   , "devDependencies": {
       "mocha": "*"
   }
+  , "scripts": {
+      "start": "app.js"
+    , "preinstall": "scripts/install.sh"
+  }
 }
-"
