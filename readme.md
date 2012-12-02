@@ -10,12 +10,14 @@ I use this for every new Express project.
 
 Add to `/etc/hosts`
 
-    127.0.0.1    localhost.yourappname.herokuapps.com
+    127.0.0.1    localhost.yourappname.herokuapp.com
 
 Create app at <https://developers.facebook.com/apps>
 
-    Site URL: http://yourappname.herokuapps.com/
-    Site Domain: localhost.yourappname.herokuapps.com
+Fill in the following details at the bottom of the page. (They are hidden by default)
+
+    Site URL: http://yourappname.herokuapp.com/
+    Site Domain: localhost.yourappname.herokuapp.com
 
 Paste `siteUrl`, `appId` and `appSecret` into `src/model.coffee` (See TODOs)
 
@@ -45,4 +47,3 @@ See <https://github.com/dannycoates/node-inspector>
 ## TODO
 
  - Zappa
- 
