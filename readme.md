@@ -17,21 +17,24 @@ Create app at <https://developers.facebook.com/apps>
 Fill in the following details at the bottom of the page. (They are hidden by default)
 
     Site URL: http://yourappname.herokuapp.com/
-    Site Domain: localhost.yourappname.herokuapp.com
+    App Domains:
+      - localhost.yourappname.herokuapp.com
+      - yourappname.herokuapp.com
 
 Paste `siteUrl`, `appId` and `appSecret` into `src/model.coffee` (See TODOs)
 
 Create a new Mongo database and modify the appropriate line in `src/model.coffee`
 
-Visit <http://localhost:3030/app>
+Visit <http://localhost:3030/>
 
 ## Install
 
-    npm install supervisor -g
+    npm install nodemon -g
+    npm install
 
 ## Dev
 
-    ./run
+    make
     
 Visit <http://localhost:3030>
 
@@ -45,5 +48,3 @@ See <https://github.com/dannycoates/node-inspector>
  Visit <http://127.0.0.1:8080/debug?port=5858>
  
 ## TODO
-
- - Zappa

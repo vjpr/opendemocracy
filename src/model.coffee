@@ -21,7 +21,7 @@ class Model
       facebook:
         everyauth:
           scope: 'read_mailbox, email'
-          myHostname: 'http://localhost.[appname].herokuapps.com:3020'
+          myHostname: 'http://localhost.[appname].herokuapp.com:3030'
           appId: '[appId]'
           appSecret: '[appSecret]'
           redirectPath: '/'
