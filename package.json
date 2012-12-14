@@ -1,5 +1,5 @@
 {
-    "name": "application-name"
+    "name": "expressbootstrap"
   , "version": "0.0.1"
   , "private": true
   , "dependencies": {
@@ -7,7 +7,7 @@
     , "express": "3.x"
     , "jade": "*"
     , "coffee-script": "*"
-    , "everyauth": ">=0.3.1"
+    , "everyauth": "git://github.com/bnoguchi/everyauth.git#express3"
     , "mongoose": ">= 3.4.0"
     , "mongoose-auth": "git://github.com/vjpr/mongoose-auth.git"
     , "imap": "*"
@@ -18,7 +18,8 @@
     , "mailparser": "*"
     , "mimelib": "*"
     , "socket.io": "*"
-    , "connect-mongo": "*"
+    , "connect-redis": "*"
+    , "redis-url": "*"
     , "request": "*"
     , "cookie": "*"
     , "underscore": "*"
@@ -26,9 +27,15 @@
     , "colors": "*"
     , "consolidate": ">= 0.5.0"
     , "live-assets": ">= 0.1.2"
+    , "express-resource": ">= 1.0"
+    , "connect-flash": "*"
   }
   , "devDependencies": {
       "mocha": "*"
+  }
+  , "engines": {
+      "node": "0.8.x"
+    , "npm": "1.1.x"
   }
   , "scripts": {
       "start": "app.js"

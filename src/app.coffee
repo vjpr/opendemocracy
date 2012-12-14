@@ -8,25 +8,28 @@ path = require 'path'
 request = require 'request'
 mongooseAuth = require 'mongoose-auth'
 _ = require 'underscore'
-MongoStore = require('connect-mongo')(express)
+RedisStore = require('connect-redis')(express)
 Q = require 'q'
 colors = require 'colors'
 require 'haml-coffee'
 cons = require 'consolidate'
 Assets = require 'live-assets'
+everyauth = require 'everyauth'
 
 # App dependencies
-routes = require("./routes")
-{Model} = require('./model')
-{Routes} = require('./routes')
+routes = require './routes'
+{Model} = require './model'
+{Routes} = require './routes'
+config = require('./config')()
 
 # Init db layer
 # -------------
-model = new Model
+console.log "Connecting to MongoDB at", config.mongo.url
+model = new Model mongoUri: config.mongo.url
 
 # Create app
 app = express()
-app.set 'port', 3030
+app.set 'port', config.app.port
 
 # Live-Assets
 # -----------
@@ -43,6 +46,7 @@ assets = new Assets
   remoteAssetsDir: '/'
   usePrecompiledAssets: false
   root: process.cwd()
+  # Add more files to this array when you need to require them from a template.
   files: ['application.js', 'style.css']
 
 # Precompile on every request.
@@ -57,8 +61,8 @@ app.engine 'jade', cons['jade']
 
 # Session Store
 # -------------
-sessionStore = new MongoStore
-  db: 'example'
+redis = require('redis-url').connect config.redis.url
+sessionStore = new RedisStore client: redis
 
 # Express Configuration
 # ---------------------
@@ -74,6 +78,8 @@ app.configure ->
     key: 'express.sid'
   app.use express.methodOverride()
   app.use mongooseAuth.middleware()
+  app.use require('everyauth').middleware(app)
+  app.use require('connect-flash')()
   #app.use app.router
 
 app.configure "development", ->
@@ -94,6 +100,7 @@ app.get "/app", routes.app
 # Locals
 # ------
 
+# TODO: Change me.
 app.locals title: 'Express Bootstrap'
 
 # Start web server

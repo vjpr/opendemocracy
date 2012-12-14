@@ -1,5 +1,25 @@
 extend layout
 block main
-  #fb-login(style='float: left; margin-left: 5px')
-    a(href='/auth/facebook', style='border: 0px')
-      img(style='border: 0px', src='http://github.com/intridea/authbuttons/raw/master/png/facebook_64.png')
+
+  div(style="text-align: center; margin-top: 50px")
+    .lead To begin, login with Facebook.
+    #fb-login(style='margin: 0 auto')
+      a(href='/auth/facebook', style='border: 0px')
+        img(style='border: 0px', src='/img/facebook_64.png')
+    br
+    .lead Or, login with an email and password.
+    - if ('undefined' !== typeof errors && errors.length)
+      ul#errors.alert.alert-error
+        - each error in errors
+          li.error= error
+    form(action='/login', method='post')
+      #login
+        label(for=everyauth.password.loginFormFieldName) Email
+        input(placeholder="Email", type='text', name=everyauth.password.loginFormFieldName)
+      #password
+        label(for=everyauth.password.passwordFormFieldName) Password
+        input(placeholder="Password", type='password', name=everyauth.password.passwordFormFieldName)
+      #submit
+        button.btn(type='submit') Login
+
+    a(href="/register") Don't have an account? Create one.

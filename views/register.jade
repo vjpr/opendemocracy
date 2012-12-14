@@ -1,0 +1,17 @@
+extend layout
+block main
+  div(style="text-align: center; margin-top: 50px")
+    .lead Sign up
+    - if ('undefined' !== typeof errors && errors.length)
+      ul#errors
+        - each error in errors
+          li.error= error
+    form(action='/register', method='post')
+      #login
+        label(for="email") Login
+        input(placeholder="Email", type='text', name="email", value=userParams[everyauth.password.loginFormFieldName])
+      #password
+        label(for="password") Password
+        input(placeholder="Password", type='password', name="password")
+      #submit
+        button.btn(type='submit') Register

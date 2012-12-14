@@ -1,4 +1,5 @@
 extend layout
 block main
-  p You are now logged in as
-    != user.fb.name.full
+  p You are now logged in as&nbsp;
+    != everyauth.user.fb.name.full
+  a(href="/logout") Log Out
