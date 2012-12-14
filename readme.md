@@ -26,9 +26,9 @@ Fill in the following details at the bottom of the page.
       - localhost.yourappname.herokuapp.com
       - yourappname.herokuapp.com
 
-Paste `siteUrl`, `appId` and `appSecret` into `src/config.coffee` (See TODOs)
+Paste `appId` and `appSecret` into `src/config.coffee`.
 
-Create a new Mongo database and modify `env.development.db.url` in `src/config.coffee`
+Modify `appName` in `src/config.coffee` to your Heroku app name.
 
 Install, then run `make`.
 
