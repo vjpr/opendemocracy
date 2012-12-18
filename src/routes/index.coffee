@@ -1,4 +1,4 @@
-class Routes
+class @Routes
 
   constructor: ->
 
@@ -10,5 +10,3 @@ class Routes
       res.render 'login'
     else
       res.render 'app', user: req.user
-
-exports.Routes = Routes
