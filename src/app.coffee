@@ -1,6 +1,6 @@
 onelog      = require 'onelog'
 onelog.use onelog.Log4js
-logger = require('onelog').get 'Logger'
+logger      = require('onelog').get 'Logger'
 
 SITE_SECRET = 'yeah whatever'
 
@@ -26,16 +26,16 @@ routes      = require './routes'
 config      = require('./config')()
 
 # Init db layer
-# -------------
 logger.info "Connecting to MongoDB at", config.mongo.url
 model = new Model mongoUri: config.mongo.url
-
-AuthController = require './auth'
-authController = new AuthController
 
 # Create app
 app = express()
 app.set 'port', config.app.port
+
+# Init auth
+AuthController = require './auth'
+authController = new AuthController
 
 # Live-Assets
 # -----------
