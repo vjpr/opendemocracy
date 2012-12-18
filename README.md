@@ -30,6 +30,8 @@ Paste `appId` and `appSecret` into `src/config.coffee`.
 
 Modify `appName` in `src/config.coffee` to your Heroku app name.
 
+Modify `name` in `package.json`.
+
 Install, then run `make`.
 
 Visit <http://localhost:3030/>
