@@ -1,6 +1,6 @@
 onelog      = require 'onelog'
 onelog.use onelog.Log4js
-logger      = require('onelog').get 'Logger'
+logger      = require('onelog').get 'App'
 
 SITE_SECRET = 'yeah whatever'
 
@@ -50,16 +50,17 @@ assets = new Assets
   expandTags: true
   assetServePath: '/assets/'
   remoteAssetsDir: '/'
-  usePrecompiledAssets: false
+  # TODO: Change last word to false.
+  usePrecompiledAssets: if app.get('env') is 'production' then true else false
   root: process.cwd()
   # Add more files to this array when you need to require them from a template.
   files: ['application.js', 'style.css']
+  logger: logger
 
-# Precompile on every request.
-app.use (req, res, next) ->
-  env = assets.getEnvironment()
-  assets.precompileForDevelopment (err) =>
-    next()
+# In development, precompile on every request.
+app.configure 'development', ->
+  app.use (req, res, next) ->
+    assets.precompileForDevelopment -> next()
 
 assets.middleware app
 
@@ -73,8 +74,8 @@ sessionStore = new RedisStore client: redis
 # Express Configuration
 # ---------------------
 app.configure ->
-  app.set "views", process.cwd() + "/views"
-  app.set "view engine", "jade"
+  app.set 'views', process.cwd() + '/views'
+  app.set 'view engine', 'jade'
   app.use express.favicon()
   app.use express.bodyParser()
   app.use express.static process.cwd() + "/public"
@@ -88,14 +89,13 @@ app.configure ->
   authController.setupMiddleware app
   app.use app.router
 
-app.configure "development", ->
-  app.use express.errorHandler(
+app.configure 'development', ->
+  app.use express.errorHandler
     dumpExceptions: true
     showStack: true
-  )
   app.use express.logger()
 
-app.configure "production", ->
+app.configure 'production', ->
   app.use express.errorHandler()
 
 # Routes
