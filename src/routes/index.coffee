@@ -6,9 +6,10 @@ class Routes
     res.render 'index'
 
   app: (req, res) =>
-    if not req.loggedIn
+    unless req.user
       res.render 'login'
     else
-      res.render 'app'
+      console.log req.user
+      res.render 'app', user: req.user
 
 exports.Routes = Routes

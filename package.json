@@ -29,6 +29,12 @@
     , "live-assets": ">= 0.1.2"
     , "express-resource": ">= 1.0"
     , "connect-flash": "*"
+    , "passport": "*"
+    , "passport-local": "*"
+    , "passport-facebook": "*"
+    , "onelog": "*"
+    , "log4js": "*"
+    , "bcrypt": "*"
   }
   , "devDependencies": {
       "mocha": "*"

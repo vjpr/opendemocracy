@@ -1,9 +1,7 @@
+logger = require('onelog').get 'Model'
 mongoose = require 'mongoose'
-mongooseAuth = require 'mongoose-auth'
-everyauth = require 'everyauth'
 config = require('./config')()
-
-everyauth.debug = true
+bcrypt = require 'bcrypt'
 
 Schema = mongoose.Schema
 
@@ -11,51 +9,35 @@ class Model
 
   constructor: ->
 
-    UserSchema = new Schema {}
+    UserSchema = new Schema
+      name: String
+      email: String
+      password: String
+      salt: String
+      fb: Schema.Types.Mixed
 
-    UserSchema.plugin mongooseAuth,
-      everymodule:
-        everyauth:
-          User: =>
-            return @User
+    UserSchema.methods.validatePassword = (attempt, cb) ->
+      hashedAttempt = bcrypt.hashSync attempt, @salt
+      cb null, @password is hashedAttempt
 
-      facebook:
-        everyauth:
-          scope: 'email'
-          myHostname: config.app.url
-          appId: config.fb.appId
-          appSecret: config.fb.appSecret
-          redirectPath: '/app'
-
-      password:
-        loginWith: 'email'
-        everyauth:
-          getLoginPath: '/login'
-          postLoginPath: '/login'
-          loginView: 'login.jade'
-          getRegisterPath: '/register'
-          postRegisterPath: '/register'
-          registerView: 'register.jade'
-          loginSuccessRedirect: '/app'
-          registerSuccessRedirect: '/'
-          loginLocals:
-            title: 'Eli'
-            everyauth: everyauth
-            email: ''
-          registerLocals:
-            title: 'Eli'
-            everyauth: everyauth
-            email: ''
-          loginFormFieldName: 'email'
+    UserSchema.statics.findOrCreate = (profile, cb) ->
+      @findOne {'fb.id': profile.id}, (err, user) =>
+        return cb err if err
+        return cb(null, user) if user
+        @create {name: profile.displayName, fb: profile}, (err, user) =>
+          if err
+            logger.error "Registration failed:", err
+            return cb err if err
+          logger.debug "Registration succeeded:", user
+          cb null, user
 
     @User = mongoose.model 'User', UserSchema
 
     mongoose.set 'debug', true
-    # TODO: Change mongodb name
     mongoose.connect config.mongo.url
-    mongoose.connection.on 'error', (err) =>
-      console.error "Connection error: " + err
+    mongoose.connection.on 'error', (err) ->
+      logger.error "Connection error: " + err
     mongoose.connection.on 'open', ->
-      console.log "Connected!"
+      logger.info "Connected!"
 
 exports.Model = Model

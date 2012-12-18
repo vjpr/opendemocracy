@@ -1,6 +1,5 @@
 extend layout
 block main
-
   div(style="text-align: center; margin-top: 50px")
     .lead To begin, login with Facebook.
     #fb-login(style='margin: 0 auto')
@@ -14,11 +13,11 @@ block main
           li.error= error
     form(action='/login', method='post')
       #login
-        label(for=everyauth.password.loginFormFieldName) Email
-        input(placeholder="Email", type='text', name=everyauth.password.loginFormFieldName)
+        label(for="username") Email
+        input(placeholder="Email", type='text', name="username")
       #password
-        label(for=everyauth.password.passwordFormFieldName) Password
-        input(placeholder="Password", type='password', name=everyauth.password.passwordFormFieldName)
+        label(for="password") Password
+        input(placeholder="Password", type='password', name="password")
       #submit
         button.btn(type='submit') Login
 

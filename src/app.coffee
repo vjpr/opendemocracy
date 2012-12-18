@@ -1,31 +1,37 @@
+onelog      = require 'onelog'
+onelog.use onelog.Log4js
+logger = require('onelog').get 'Logger'
+
 SITE_SECRET = 'yeah whatever'
 
-# Vendor dependencies
-connect = require('connect')
-express = require 'express'
-sio = require 'socket.io'
-path = require 'path'
-request = require 'request'
-mongooseAuth = require 'mongoose-auth'
-_ = require 'underscore'
-RedisStore = require('connect-redis')(express)
-Q = require 'q'
-colors = require 'colors'
-require 'haml-coffee'
-cons = require 'consolidate'
-Assets = require 'live-assets'
-everyauth = require 'everyauth'
+# Vendor dependencies.
+_           = require 'underscore'
+path        = require 'path'
+Q           = require 'q'
+cons        = require 'consolidate'
+express     = require 'express'
+sio         = require 'socket.io'
+request     = require 'request'
+RedisStore  = require('connect-redis')(express)
+colors      = require 'colors'
+Assets      = require 'live-assets'
+Resource    = require 'express-resource'
+passport    = require 'passport'
+flash       = require 'connect-flash'
 
-# App dependencies
-routes = require './routes'
-{Model} = require './model'
-{Routes} = require './routes'
-config = require('./config')()
+# App dependencies.
+routes      = require './routes'
+{Model}     = require './model'
+{Routes}    = require './routes'
+config      = require('./config')()
 
 # Init db layer
 # -------------
-console.log "Connecting to MongoDB at", config.mongo.url
+logger.info "Connecting to MongoDB at", config.mongo.url
 model = new Model mongoUri: config.mongo.url
+
+AuthController = require './auth'
+authController = new AuthController
 
 # Create app
 app = express()
@@ -69,6 +75,7 @@ sessionStore = new RedisStore client: redis
 app.configure ->
   app.set "views", process.cwd() + "/views"
   app.set "view engine", "jade"
+  app.use express.favicon()
   app.use express.bodyParser()
   app.use express.static process.cwd() + "/public"
   app.use express.cookieParser()
@@ -77,16 +84,16 @@ app.configure ->
     store: sessionStore
     key: 'express.sid'
   app.use express.methodOverride()
-  app.use mongooseAuth.middleware()
-  app.use require('everyauth').middleware(app)
-  app.use require('connect-flash')()
-  #app.use app.router
+  app.use flash()
+  authController.setupMiddleware app
+  app.use app.router
 
 app.configure "development", ->
   app.use express.errorHandler(
     dumpExceptions: true
     showStack: true
   )
+  app.use express.logger()
 
 app.configure "production", ->
   app.use express.errorHandler()
@@ -96,6 +103,7 @@ app.configure "production", ->
 routes = new Routes
 app.get "/", routes.index
 app.get "/app", routes.app
+authController.setupRoutes app
 
 # Locals
 # ------
@@ -107,7 +115,7 @@ app.locals title: 'Express Bootstrap'
 # ----------------
 server = require('http').createServer app
 server.listen app.get('port')
-console.log "Express server listening on port #{app.get('port').toString().green.bold} in #{app.get('env')} mode"
+logger.info "Express server listening on port #{app.get('port').toString().green.bold} in #{app.get('env')} mode"
 
 # Socket.io
 # ---------

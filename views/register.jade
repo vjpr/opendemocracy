@@ -3,15 +3,20 @@ block main
   div(style="text-align: center; margin-top: 50px")
     .lead Sign up
     - if ('undefined' !== typeof errors && errors.length)
-      ul#errors
+      ul#errors.alert.alert-error
         - each error in errors
           li.error= error
     form(action='/register', method='post')
+      #name
+        label(for="name") Name
+        input(placeholder="Name", type='text', name="name")
       #login
-        label(for="email") Login
-        input(placeholder="Email", type='text', name="email", value=userParams[everyauth.password.loginFormFieldName])
+        label(for="username") Email
+        input(placeholder="Email", type='text', name="username")
       #password
         label(for="password") Password
         input(placeholder="Password", type='password', name="password")
       #submit
         button.btn(type='submit') Register
+
+    a(href="/login") Already have an account? Login.
