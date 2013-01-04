@@ -2,6 +2,14 @@
 
 I use this for every new Express project.
 
+## Checkout
+
+  mkdir yourappname
+  cd yourappname
+  git clone https://github.com/vjpr/express-bootstrap.git .
+
+If using IntelliJ, `File > Open...` and select `yourappname` dir you just created.
+
 ## Setup
 
     heroku apps:create yourappname
