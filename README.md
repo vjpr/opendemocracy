@@ -15,6 +15,10 @@ Create a repo on GitHub for `yourappname`.
   git remote rename origin bootstrap
   git remote add origin <remote-github-url>
 
+### Live Reload
+
+Add `yourappname` folder as a monitored folder in LiveReload. Exclude the `src` directory.
+
 ## Setup
 
     heroku apps:create yourappname
@@ -70,5 +74,18 @@ See <https://github.com/dannycoates/node-inspector>
     node-inspector &
     
  Visit <http://127.0.0.1:8080/debug?port=5858>
- 
+
+## Deploy
+
+### Heroku
+
+  git push heroku master
+
+### EC2
+
+*Coming soon using Chef...*
+
 ## TODO
+
+- EC2 deploy using Chef.
+- LiveReload built in.
