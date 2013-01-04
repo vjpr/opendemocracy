@@ -2,7 +2,7 @@ _ = require 'underscore'
 
 module.exports = (env) ->
 
-  appName = "expressbootstrap"
+  appName = "expressbootstrap" # TODO
 
   envs =
     development:
@@ -10,7 +10,7 @@ module.exports = (env) ->
         port: 3030
         url: "http://localhost.#{appName}.herokuapp.com:3030"
       mongo:
-        url: "mongodb://localhost/#{appName}" # TODO
+        url: "mongodb://localhost/#{appName}"
       redis:
         url: "localhost"
     production:
