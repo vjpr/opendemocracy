@@ -10,6 +10,11 @@ I use this for every new Express project.
 
 If using IntelliJ, `File > Open...` and select `yourappname` dir you just created.
 
+Create a repo on GitHub for `yourappname`.
+
+  git remote rename origin bootstrap
+  git remote add origin <remote-github-url>
+
 ## Setup
 
     heroku apps:create yourappname
