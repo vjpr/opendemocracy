@@ -45,7 +45,7 @@ Modify `appName` in `src/config.coffee` to your Heroku app name.
 
 Modify `name` in `package.json`.
 
-Install, then run `make`.
+Install with `npm install`, then run `make`.
 
 Visit <http://localhost:3030/>
 
