@@ -51,6 +51,9 @@ Modify `name` in `package.json`.
 
 Install with `npm install`, then run `make`.
 
+Install vendor libraries with Bower: `bower install`. (This will be slow the
+first time you run it because the libraries are not cached yet.)
+
 Visit <http://localhost:3030/>
 
 ## Install
@@ -59,6 +62,8 @@ Make sure you are using Node 0.8.x.
 
     npm install nodemon -g
     npm install
+    npm install bower -g
+    bower install
 
 ## Dev
 

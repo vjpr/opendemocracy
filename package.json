@@ -11,6 +11,7 @@
     , "connect-assets": "*"
     , "underscore": "*"
     , "stylus": "*"
+    , "less": "*"
     , "haml-coffee": "*"
     , "socket.io": "*"
     , "connect-redis": "*"

@@ -45,6 +45,7 @@ assets = new Assets
     'assets/app/css'
     'assets/vendor/js'
     'assets/vendor/css'
+    'assets/vendor/components'
   ]
   digest: false
   expandTags: true
