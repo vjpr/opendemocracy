@@ -28,14 +28,16 @@ debug-brk:
 
 test:
 
-	@./node_modules/.bin/mocha $(arg)
+	@NODE_ENV=test ./node_modules/.bin/mocha $(arg)
 
-testfe:
+testw:
 
-	open http://localhost:3030/test/
+	@NODE_ENV=test ./node_modules/.bin/mocha \
+		--growl \
+		--watch
 
-watch:
+testc:
 
-	guard
+	open http://localhost:3030/test
 
-.PHONY: test testfe run debug watch prod debug-inspector debug1 debug-brk compile
+.PHONY: test testw testc run debug prod debug-inspector debug1 debug-brk compile

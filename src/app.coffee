@@ -20,14 +20,14 @@ passport    = require 'passport'
 flash       = require 'connect-flash'
 
 # App dependencies.
-routes      = require './routes'
-{Model}     = require './model'
-{Routes}    = require './routes'
 config      = require('./config')()
 
 # Init db layer
 logger.info "Connecting to MongoDB at", config.mongo.url
+{Model} = require './model'
 model = new Model mongoUri: config.mongo.url
+
+{Routes} = require './routes'
 
 # Create app
 app = express()
@@ -46,6 +46,8 @@ assets = new Assets
     'assets/vendor/js'
     'assets/vendor/css'
     'assets/vendor/components'
+    'test/client/app'
+    'test/client/vendor'
   ]
   digest: false
   expandTags: true
@@ -55,13 +57,17 @@ assets = new Assets
   usePrecompiledAssets: if app.get('env') is 'production' then true else false
   root: process.cwd()
   # Add more files to this array when you need to require them from a template.
-  files: ['application.js', 'style.css']
+  files: ['application.js', 'style.css', 'test.js', 'test.css']
   logger: logger
 
-# In development, precompile on every request.
+# In development, precompile on every HTML request.
 app.configure 'development', ->
   app.use (req, res, next) ->
-    assets.precompileForDevelopment -> next()
+    isHTMLRequest = req.accepted[0].value is 'text/html'
+    if isHTMLRequest
+      assets.precompileForDevelopment -> next()
+    else
+      next()
 
 assets.middleware app
 
@@ -105,6 +111,10 @@ routes = new Routes
 app.get "/", routes.index
 app.get "/app", routes.app
 authController.setupRoutes app
+
+# Test Routes
+# -----------
+app.get "/test", require('./routes/test').allTests
 
 # Locals
 # ------

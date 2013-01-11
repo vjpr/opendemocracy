@@ -71,6 +71,16 @@ Make sure you are using Node 0.8.x.
     
 Visit <http://localhost:3030>
 
+## Test
+
+### Server
+
+    make testw
+
+### Client
+
+`make testc` or visit <http://localhost:3030/test>
+
 ## Debug
 
 See <https://github.com/dannycoates/node-inspector>
