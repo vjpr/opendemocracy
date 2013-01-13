@@ -79,7 +79,8 @@ Visit <http://localhost:3030>
 
 ### Client
 
-`make testc` or visit <http://localhost:3030/test>
+`make testc` or visit <http://localhost:3030/test>.
+Make sure the server is running.
 
 ## Debug
 

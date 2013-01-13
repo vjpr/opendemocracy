@@ -13,6 +13,14 @@ module.exports = (env) ->
         url: "mongodb://localhost/#{appName}"
       redis:
         url: "localhost"
+    test:
+      app:
+        port: 3030
+        url: "http://localhost.#{appName}.herokuapp.com:3030"
+      mongo:
+        url: "mongodb://localhost/#{appName}-test"
+      redis:
+        url: "localhost"
     production:
       app:
         port: process.env.PORT
