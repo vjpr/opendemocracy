@@ -10,19 +10,21 @@ module.exports = (env) ->
 
   url = null # TODO
 
+  port = 3030
+
   envs =
     development:
       app:
-        port: 3030
-        url: "http://localhost.#{appName}.herokuapp.com:3030"
+        port: port
+        url: "http://localhost.#{appName}.herokuapp.com:#{port}"
       mongo:
         url: "mongodb://localhost/#{appName}"
       redis:
         url: "localhost"
     test:
       app:
-        port: 3030
-        url: "http://localhost.#{appName}.herokuapp.com:3030"
+        port: port
+        url: "http://localhost.#{appName}.herokuapp.com:#{port}"
       mongo:
         url: "mongodb://localhost/#{appName}-test"
       redis:

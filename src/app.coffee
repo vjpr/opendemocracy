@@ -142,13 +142,12 @@ logger      = require('onelog').get 'App'
 
   app
 
-createServer = (app) ->
+createServer = (port, server, app) ->
+  server.listen port
 
-  # Start web server
-  # ----------------
-  server = require('http').createServer app
-  server.listen app.get('port')
-  logger.info "Express server listening on port #{app.get('port').toString().green.bold} in #{app.get('env')} mode"
+onListening = (server, app) ->
+  port = server.address().port
+  logger.info "Express server listening on port #{port.toString().green.bold} in #{app.get('env')} mode"
 
   # Socket.io
   # ---------
@@ -176,4 +175,18 @@ createServer = (app) ->
 @start = ->
 
   app = app()
-  createServer app
+  port = app.get('port')
+
+  server = require('http').createServer app
+
+  if app.get('env') isnt 'production'
+    server.on 'error', (e) ->
+      # If port is in use. Use next available port.
+      if e.code is 'EADDRINUSE'
+        newPort = port + 1
+        logger.warn "Port #{port.toString()} is in use. Trying port: #{newPort}"
+        #server.close()
+        createServer newPort, server, app
+    server.on 'listening', -> onListening server, app
+
+  createServer port, server, app
