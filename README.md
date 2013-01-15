@@ -47,6 +47,8 @@ Paste `appId` and `appSecret` into `src/config.coffee`.
 
 Modify `appName` in `src/config.coffee` to your Heroku app name.
 
+Modify `url` in `src/config.coffee` to your app domain.
+
 Modify `name` in `package.json`.
 
 Install with `npm install`, then run `make`.

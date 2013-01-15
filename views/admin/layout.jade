@@ -1,0 +1,17 @@
+!!!
+html
+  head
+    title= title
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js')
+    != js('admin.js')
+    != css('admin.css')
+  body(data-spy="scroll", data-target=".navbar")
+    #navbar.navbar.navbar-fixed-top
+      .navbar-inner
+        .container
+          a.brand(href="#")= title
+          ul.nav
+            li.active: a(href="#") Home
+            li: a(href="#") Page
+    .container(style="margin-top: 40px; padding-top: 60px")
+      block main

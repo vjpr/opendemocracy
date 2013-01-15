@@ -8,6 +8,8 @@ module.exports = (env) ->
 
   appName = "expressbootstrap" # TODO
 
+  url = null # TODO
+
   envs =
     development:
       app:
@@ -28,7 +30,7 @@ module.exports = (env) ->
     production:
       app:
         port: process.env.PORT
-        url: "http://#{appName}.herokuapp.com"
+        url: url or "http://#{appName}.herokuapp.com"
       mongo:
         url: process.env.MONGOLAB_URI or process.env.MONGOHQ_URL
       redis:

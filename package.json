@@ -36,7 +36,8 @@
   }
   , "devDependencies": {
       "mocha": "*",
-      "chai": "*"
+      "chai": "*",
+      "supertest": "*"
   }
   , "engines": {
       "node": "0.8.x"
