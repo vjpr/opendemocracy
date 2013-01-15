@@ -18,6 +18,7 @@ Assets      = require 'live-assets'
 Resource    = require 'express-resource'
 passport    = require 'passport'
 flash       = require 'connect-flash'
+validator   = require 'express-validator'
 
 # App dependencies.
 config      = require('./config')()
@@ -50,7 +51,7 @@ assets = new Assets
     'test/client/vendor'
   ]
   digest: false
-  expandTags: true
+  expandTags: if app.get('env') is 'production' then false else true
   assetServePath: '/assets/'
   remoteAssetsDir: '/'
   # TODO: Change last word to false.
@@ -92,7 +93,12 @@ app.configure ->
     store: sessionStore
     key: 'express.sid'
   app.use express.methodOverride()
+  app.use validator
   app.use flash()
+  app.use (req, res, next) ->
+    res.locals.info = req.flash 'info'
+    res.locals.error = req.flash 'error'
+    next()
   authController.setupMiddleware app
   app.use app.router
 

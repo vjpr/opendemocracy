@@ -2,10 +2,10 @@ extend layout
 block main
   div(style="text-align: center; margin-top: 50px")
     .lead Sign up
-    - if ('undefined' !== typeof errors && errors.length)
+    - if (typeof error !== 'undefined' && error.length)
       ul#errors.alert.alert-error
-        - each error in errors
-          li.error= error
+        - each e in error
+          li.error= e
     form(action='/register', method='post')
       #name
         label(for="name") Name

@@ -32,9 +32,11 @@
     , "log4js": "*"
     , "bcrypt": "*"
     , "bower": "*"
+    , "express-validator": "*"
   }
   , "devDependencies": {
-      "mocha": "*"
+      "mocha": "*",
+      "chai": "*"
   }
   , "engines": {
       "node": "0.8.x"

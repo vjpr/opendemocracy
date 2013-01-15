@@ -1,6 +1,10 @@
 _ = require 'underscore'
 
+config = null
+
 module.exports = (env) ->
+
+  return config if config?
 
   appName = "expressbootstrap" # TODO
 

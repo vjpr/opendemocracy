@@ -16,9 +16,9 @@ class Model
       salt: String
       fb: Schema.Types.Mixed
 
-    UserSchema.methods.validatePassword = (attempt, cb) ->
+    UserSchema.methods.validatePassword = (attempt) ->
       hashedAttempt = bcrypt.hashSync attempt, @salt
-      cb null, @password is hashedAttempt
+      @password is hashedAttempt
 
     UserSchema.statics.findOrCreate = (profile, cb) ->
       @findOne {'fb.id': profile.id}, (err, user) =>
@@ -30,6 +30,10 @@ class Model
             return cb err if err
           logger.debug "Registration succeeded:", user
           cb null, user
+
+    UserSchema.methods.getDisplayName = ->
+      return @fb.displayName if @fb?.displayName?
+      return @name
 
     @User = mongoose.model 'User', UserSchema
 

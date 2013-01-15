@@ -1,5 +1,5 @@
 extend layout
 block main
   p You are now logged in as&nbsp;
-    != user.name
+    != user.getDisplayName()
   a(href="/logout") Log Out

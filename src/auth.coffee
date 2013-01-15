@@ -5,6 +5,7 @@ FacebookStrategy = require('passport-facebook').Strategy
 mongoose        = require 'mongoose'
 config          = require('./config')()
 bcrypt          = require 'bcrypt'
+_               = require 'underscore'
 
 User = mongoose.model 'User'
 
@@ -67,11 +68,11 @@ class PassportSupport
         message = "User not found."
         logger.debug "Authentication failed: #{message}"
         return done null, false, {message}
-      user.validatePassword password, (err, valid) ->
-        unless valid
-          message = "Incorrect password."
-          logger.debug "Authentication failed: #{message}"
-          return done null, false, {message}
+      unless user.validatePassword password
+        message = "Incorrect password."
+        logger.debug "Authentication failed: #{message}"
+        return done null, false, {message}
+      else
         logger.debug "Authentication successful:", user
         return done null, user
 
@@ -102,7 +103,7 @@ class AuthController
     # --------
 
     app.get settings.password.getLoginPath, (req, res) ->
-      res.render settings.password.loginView, errors: req.flash 'error'
+      res.render settings.password.loginView
 
     app.post settings.password.postLoginPath,
       passport.authenticate 'local',
@@ -115,9 +116,18 @@ class AuthController
       res.redirect settings.common.logoutSuccessRedirect
 
     app.get settings.password.getRegisterPath, (req, res) ->
-      res.render settings.password.registerView, errors: req.flash 'error'
+      res.render settings.password.registerView
 
     app.post settings.password.postRegisterPath, (req, res, next) ->
+      # Validation
+      req.assert('name', "Name can't be empty.").notEmpty()
+      req.assert(settings.password.loginFormFieldName, "Must use a valid email.").isEmail()
+      req.assert(settings.password.passwordFormFieldName, "Password must be at least 6 characters.").len(6)
+      errors = req.validationErrors()
+      if errors
+        req.flash 'error', _.pluck errors, 'msg'
+        return res.redirect settings.password.getRegisterPath
+
       generatePasswordHash = (password) ->
         salt = bcrypt.genSaltSync 10
         hash = bcrypt.hashSync password, salt
@@ -128,7 +138,7 @@ class AuthController
       User.findOne {email}, (err, user) ->
         return next err if err
         if user
-          req.flash 'error', "User already exists."
+          req.flash 'error', ["User already exists."]
           return res.redirect settings.password.getRegisterPath
         [hash, salt] = generatePasswordHash password
         newUser =
