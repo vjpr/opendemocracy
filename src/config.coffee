@@ -21,6 +21,7 @@ module.exports = (env) ->
         url: "mongodb://localhost/#{appName}"
       redis:
         url: "localhost"
+      remoteAssetsUrl: "/"
     test:
       app:
         port: port
@@ -37,6 +38,7 @@ module.exports = (env) ->
         url: process.env.MONGOLAB_URI or process.env.MONGOHQ_URL
       redis:
         url: process.env.REDISTOGO_URL
+      remoteAssetsUrl: "http://#{appName}.s3-website-ap-southeast-2.amazonaws.com/"
     common:
       fb:
         appId: '451899438203860' # TODO

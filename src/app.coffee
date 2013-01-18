@@ -54,7 +54,7 @@ logger      = require('onelog').get 'App'
     digest: false
     expandTags: if app.get('env') is 'production' then false else true
     assetServePath: '/assets/'
-    remoteAssetsDir: '/'
+    remoteAssetsDir: config.remoteAssetsUrl
     # TODO: Change last word to false.
     usePrecompiledAssets: if app.get('env') is 'production' then true else false
     root: process.cwd()
@@ -147,6 +147,7 @@ createServer = (port, server, app) ->
 
 onListening = (server, app) ->
   port = server.address().port
+  process.exit() unless port?
   logger.info "Express server listening on port #{port.toString().green.bold} in #{app.get('env')} mode"
 
   # Socket.io

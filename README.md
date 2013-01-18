@@ -103,6 +103,11 @@ See <https://github.com/dannycoates/node-inspector>
 
 *Coming soon using Chef...*
 
+### Notes
+
+- Place images in assets/app/img if you want them to use the correct urls
+when deployed remotely.
+
 ## TODO
 
 - EC2 deploy using Chef.
