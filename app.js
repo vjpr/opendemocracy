@@ -1,2 +1,2 @@
 require('coffee-script');
-require('./src/app.coffee').start()
+require('./app/app.coffee').start()

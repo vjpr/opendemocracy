@@ -45,6 +45,6 @@
   }
   , "scripts": {
       "start": "app.js"
-    , "postinstall": "scripts/install.sh"
+    , "postinstall": "script/install.sh"
   }
 }

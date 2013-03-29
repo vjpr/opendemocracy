@@ -6,8 +6,8 @@ request = require 'supertest'
 chai = require 'chai'
 chai.should()
 
-config = require(process.cwd() + '/src/config')('test')
-app = require(process.cwd() + '/src/app').app()
+config = require(process.cwd() + '/app/config')('test')
+app = require(process.cwd() + '/app/app').app()
 server = require('http').createServer app
 
 describe 'Server', ->

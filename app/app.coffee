@@ -29,7 +29,7 @@ logger      = require('onelog').get 'App'
   {Model} = require './model'
   model = new Model mongoUri: config.mongo.url
 
-  {Routes} = require './routes'
+  {Routes} = require './controllers'
 
   # Create app
   app = express()
@@ -90,11 +90,11 @@ logger      = require('onelog').get 'App'
   # Express Configuration
   # ---------------------
   app.configure ->
-    app.set 'views', process.cwd() + '/views'
+    app.set 'views', path.join process.cwd(), 'app/views'
     app.set 'view engine', 'jade'
     app.use express.favicon()
     app.use express.bodyParser()
-    app.use express.static process.cwd() + "/public"
+    app.use express.static path.join process.cwd(), 'public'
     app.use express.cookieParser()
     app.use express.session
       secret: SITE_SECRET
@@ -128,11 +128,11 @@ logger      = require('onelog').get 'App'
 
   # Admin Routes
   # ------------
-  app.get "/admin", require('./routes/admin').index
+  app.get "/admin", require('./controllers/admin').index
 
   # Test Routes
   # -----------
-  app.get "/test", require('./routes/test').allTests
+  app.get "/test", require('./controllers/test').allTests
 
   # Locals
   # ------

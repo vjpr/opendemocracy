@@ -1,10 +1,10 @@
 debug:
 
-	nodemon --watch src --watch lib --watch app.js --debug app.js
+	nodemon --watch app --watch lib --watch app.js --debug app.js
 
 run:
 
-	nodemon --watch src --watch lib --watch app.js app.js
+	nodemon --watch app --watch lib --watch app.js app.js
 
 compile:
 
