@@ -1,10 +1,10 @@
 debug:
 
-	nodemon --watch app --watch lib --watch app.js --debug app.js
+	NODE_PATH='lib:app' nodemon --watch app --watch lib --watch framework --watch app.js --debug app.js
 
 run:
 
-	nodemon --watch app --watch lib --watch app.js app.js
+	NODE_PATH='lib:app' nodemon --watch app --watch lib --watch framework --watch app.js app.js
 
 compile:
 

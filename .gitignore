@@ -1,19 +1,4 @@
-# Exclude contents of `node_modules` except symlinks to modules in `/lib`.
-
-# Include `node_modules`
-!node_modules/
-# Exclude everything inside
-node_modules/*
-
-# The following paths should be symlinks to modules inside `/lib`.
-# Use the following command to create a symlink.
-#
-#     cd node_modules && ln -s ../lib/foo foo
-#
-#!node_modules/foo
-
-# Generated
-compiled/
+node_modules/
 
 # Temp
 .vagrant
@@ -26,4 +11,4 @@ npm-debug.log
 .idea/tasks.xml
 
 # Bower Components
-assets/vendor/components
+/assets/components

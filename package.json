@@ -1,50 +1,51 @@
 {
-    "name": "expressbootstrap"
-  , "version": "0.0.1"
-  , "private": true
-  , "dependencies": {
-      "connect": "1.x"
-    , "express": "3.x"
-    , "jade": "*"
-    , "coffee-script": "*"
-    , "mongoose": ">= 3.4.0"
-    , "connect-assets": "*"
-    , "underscore": "*"
-    , "stylus": "*"
-    , "less": "*"
-    , "haml-coffee": "*"
-    , "socket.io": "*"
-    , "connect-redis": "*"
-    , "redis-url": "*"
-    , "request": "*"
-    , "cookie": "*"
-    , "underscore": "*"
-    , "q": "*"
-    , "colors": "*"
-    , "consolidate": ">= 0.5.0"
-    , "live-assets": ">= 0.1.2"
-    , "express-resource": ">= 1.0"
-    , "connect-flash": "*"
-    , "passport": "*"
-    , "passport-local": "*"
-    , "passport-facebook": "*"
-    , "onelog": "*"
-    , "log4js": "*"
-    , "bcrypt": "*"
-    , "bower": "*"
-    , "express-validator": "*"
-  }
-  , "devDependencies": {
-      "mocha": "*",
-      "chai": "*",
-      "supertest": "*"
-  }
-  , "engines": {
-      "node": "0.8.x"
-    , "npm": "1.1.x"
-  }
-  , "scripts": {
-      "start": "app.js"
-    , "postinstall": "script/install.sh"
+  "name": "expressbootstrap",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "connect": "1.x",
+    "express": "3.x",
+    "jade": "*",
+    "coffee-script": "*",
+    "mongoose": ">= 3.4.0",
+    "connect-assets": "*",
+    "underscore": "*",
+    "stylus": "*",
+    "less": "*",
+    "haml-coffee": "*",
+    "socket.io": "*",
+    "connect-redis": "*",
+    "redis-url": "*",
+    "request": "*",
+    "cookie": "*",
+    "q": "*",
+    "colors": "*",
+    "consolidate": ">= 0.5.0",
+    "live-assets": ">= 0.1.2",
+    "express-resource": ">= 1.0",
+    "connect-flash": "*",
+    "passport": "*",
+    "passport-local": "*",
+    "passport-facebook": "*",
+    "onelog": "*",
+    "log4js": "*",
+    "bcrypt": "*",
+    "bower": "*",
+    "express-validator": "*",
+    "mixable": "~0.3.0",
+    "zombie": "~1.4.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "supertest": "*"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "scripts": {
+    "start": "app.js",
+    "postinstall": "script/install.sh"
   }
 }

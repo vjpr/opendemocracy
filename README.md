@@ -25,6 +25,7 @@ Add `yourappname` folder as a monitored folder in LiveReload. Exclude the `src` 
     heroku addons:add mongolab:starter
     heroku addons:add redistogo:nano
     heroku config:add NODE_ENV=production
+    heroku config:add NODE_PATH='lib:app'
 
 See https://devcenter.heroku.com/articles/nodejs for more.
 

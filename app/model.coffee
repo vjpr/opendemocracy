@@ -1,47 +1,24 @@
 logger = require('onelog').get 'Model'
 mongoose = require 'mongoose'
-config = require('./config')()
+config = require('config')()
 bcrypt = require 'bcrypt'
-
-Schema = mongoose.Schema
 
 class Model
 
   constructor: ->
 
-    UserSchema = new Schema
-      name: String
-      email: String
-      password: String
-      salt: String
-      fb: Schema.Types.Mixed
-
-    UserSchema.methods.validatePassword = (attempt) ->
-      hashedAttempt = bcrypt.hashSync attempt, @salt
-      @password is hashedAttempt
-
-    UserSchema.statics.findOrCreate = (profile, cb) ->
-      @findOne {'fb.id': profile.id}, (err, user) =>
-        return cb err if err
-        return cb(null, user) if user
-        @create {name: profile.displayName, fb: profile}, (err, user) =>
-          if err
-            logger.error "Registration failed:", err
-            return cb err if err
-          logger.debug "Registration succeeded:", user
-          cb null, user
-
-    UserSchema.methods.getDisplayName = ->
-      return @fb.displayName if @fb?.displayName?
-      return @name
-
-    @User = mongoose.model 'User', UserSchema
+    User = require('./models/user')()
 
     mongoose.set 'debug', true
-    mongoose.connect config.mongo.url
-    mongoose.connection.on 'error', (err) ->
-      logger.error "Connection error: " + err
-    mongoose.connection.on 'open', ->
-      logger.info "Connected!"
+
+    # So testing will work. Mocha keeps our app alive somehow.
+    unless mongoose.connection?
+
+      logger.debug "Connecting to MongoDB at", @config.mongo.url
+      mongoose.connect config.mongo.url
+      mongoose.connection.on 'error', (err) ->
+        logger.error "MongoDB connection error: " + err
+      mongoose.connection.on 'open', ->
+        logger.debug "Connected to MongoDB"
 
 exports.Model = Model

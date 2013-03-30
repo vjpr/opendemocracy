@@ -12,23 +12,9 @@ chai.should()
 expect = require('chai').expect
 
 config = require(path.join process.cwd(), '/config')('test')
-LiveApp = require(path.join process.cwd(), '/app/app')
-
-# Integration testing.
-liveApp = LiveApp.start()
-expressApp = liveApp.app
-#expressApp = require('http').createServer LiveApp.app()
-
-describe 'Server', ->
-
-  #before (done) ->
-    # Wait for a mongodb connection before running tests.
-    #mongoose.connection.on 'open', done
-
-  it 'homepage should show', (done) ->
-    request(expressApp).get('/').expect(200).end (e) ->
-      return done e if e
-      done()
+liveApp = require('main/app')
+# Runs full app on localhost.
+liveApp.start()
 
 describe 'Integration', ->
 

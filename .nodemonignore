@@ -8,10 +8,6 @@
 
 # Assets
 /assets/*
-#/app/assets/*
-#/vendor/assets/*
-#/lib/assets/*
 
 # Other
 /compiled/*
-/config/*

@@ -3,7 +3,7 @@ passport        = require 'passport'
 LocalStrategy   = require('passport-local').Strategy
 FacebookStrategy = require('passport-facebook').Strategy
 mongoose        = require 'mongoose'
-config          = require('./config')()
+config          = require('config')()
 bcrypt          = require 'bcrypt'
 _               = require 'underscore'
 
