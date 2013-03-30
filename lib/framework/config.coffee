@@ -34,8 +34,8 @@ merge = (srcs...) ->
   config = env: env
   config = merge config, require('config/common')
   config = merge config, require("config/environments/#{env}")(config)
-  , extractSettingsForEnvironment(env, require('config/database')(config))
+  , {database: extractSettingsForEnvironment(env, require('config/database')(config))}
   , {session: require('config/session')}
-  , require('config/credentials')
+  , {credentials: require('config/credentials')}
 
   return config

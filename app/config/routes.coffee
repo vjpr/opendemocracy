@@ -4,7 +4,7 @@ controller = (c) -> resolvePath path.join 'controllers', c
 
 module.exports = ->
 
-  @get '/', require(controller 'app').index
-  @get '/app', require(controller 'app').app
-  @get '/admin', require(controller 'admin').index
-  @get '/test', require(controller 'test').allTests
+  @get '/', require(controller 'appController').index
+  @get '/app', require(controller 'appController').app
+  @get '/admin', require(controller 'adminController').index
+  @get '/test', require(controller 'testController').allTests

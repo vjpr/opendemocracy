@@ -7,7 +7,8 @@ config          = require('config')()
 bcrypt          = require 'bcrypt'
 _               = require 'underscore'
 
-User = mongoose.model 'User'
+#User = mongoose.model 'User'
+User = require 'services/userService'
 
 settings =
   common:
@@ -17,8 +18,8 @@ settings =
   facebook:
     scope: 'email'
     myHostname: config.app.url
-    appId: config.fb.appId
-    appSecret: config.fb.appSecret
+    appId: config.credentials.fb.appId
+    appSecret: config.credentials.fb.appSecret
     redirectPath: '/app'
 
   password:
@@ -33,14 +34,16 @@ settings =
     loginFormFieldName: 'username'
     passwordFormFieldName: 'password'
 
+allowedUserFields = 'id name email fb'
+
 # Provides functionality to support Passport.
 class PassportSupport
 
   constructor: (@db) ->
 
     passport.use new FacebookStrategy
-      clientID: config.fb.appId
-      clientSecret: config.fb.appSecret
+      clientID: config.credentials.fb.appId
+      clientSecret: config.credentials.fb.appSecret
       callbackURL: "#{config.app.url}/auth/facebook/callback"
       passReqToCallback: true
     , (req, accessToken, refreshToken, profile, done) ->
@@ -59,8 +62,8 @@ class PassportSupport
 
   # Used by Passport to authenticate login requests.
   authenticate: (email, password, done) =>
-    logger.debug "Authentication starting"
-    User.findOne {email}, (err, user) ->
+    logger.debug "Authentication starting now"
+    User.findOne {email}, allowedUserFields, (err, user) ->
       if err
         logger.debug "Authentication failed: Server error:", err
         return done err
@@ -82,7 +85,7 @@ class PassportSupport
   deserialize: (id, done) =>
     unless id
      return done "No user id stored in session"
-    User.findById id, 'id name email fb', (err, user) -> done err, user
+    User.findById id, allowedUserFields, (err, user) -> done err, user
 
 # Authentication routes for login, logout, registration.
 class AuthController
@@ -135,7 +138,7 @@ class AuthController
       name = req.body?.name
       email = req.body?[settings.password.loginFormFieldName]
       password = req.body?[settings.password.passwordFormFieldName]
-      User.findOne {email}, (err, user) ->
+      User.findOne {email}, allowedUserFields, (err, user) ->
         return next err if err
         if user
           req.flash 'error', ["User already exists."]
@@ -150,7 +153,7 @@ class AuthController
           if err
             logger.error "Registration failed:", err
             return next err if err
-          logger.debug "Registration succeeded:", user
+          logger.debug "Registration succeeded:", user.name, user.email
           req.login user, (err) ->
             return next err if err
             res.redirect settings.password.registerSuccessRedirect

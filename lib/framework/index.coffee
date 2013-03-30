@@ -15,11 +15,14 @@ colors = require 'colors'
   RedisSession: ->
     express = require 'express'
     RedisStore = require('connect-redis')(express)
-    redis = require('redis-url').connect @config.redis.url
+    redis = require('redis-url').connect @config.database.redis.url
     @sessionStore = new RedisStore client: redis
   Mongoose: ->
-    {Model} = require 'main/model'
-    model = new Model mongoUri: @config.mongo.url
+    MongooseAdapter = require 'mongooseDb'
+    new MongooseAdapter mongoUri: @config.database.mongo.url
+  Sequelize: ->
+    SequelizeAdapter = require 'sequelizeDb'
+    new SequelizeAdapter
   PassportAuth:
     Middleware: ->
       passport = require 'passport'

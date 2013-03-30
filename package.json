@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "connect": "1.x",
+    "connect": "*",
     "express": "3.x",
     "jade": "*",
     "coffee-script": "*",
@@ -33,7 +33,8 @@
     "bower": "*",
     "express-validator": "*",
     "mixable": "~0.3.0",
-    "zombie": "~1.4.1"
+    "zombie": "~1.4.1",
+    "sequelize": "~1.6.0-beta4"
   },
   "devDependencies": {
     "mocha": "*",

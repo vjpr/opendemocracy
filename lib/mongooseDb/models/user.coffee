@@ -1,4 +1,6 @@
+logger = require('onelog').get 'UserModel'
 mongoose = require 'mongoose'
+bcrypt = require 'bcrypt'
 Schema = mongoose.Schema
 
 module.exports = ->
@@ -29,6 +31,4 @@ module.exports = ->
     return @fb.displayName if @fb?.displayName?
     return @name
 
-  @User = mongoose.model 'User', UserSchema
-
-  @User
+  mongoose.model 'User', UserSchema

@@ -15,3 +15,13 @@ module.exports = (config) ->
       url: process.env.REDISTOGO_URL
     test:
       url: "localhost"
+
+  mysql:
+    development:
+      name: 'expressbootstrap'
+      username: 'root'
+      password: null
+    production:
+      name: 'expressbootstrap'
+      host: 'localhost'
+      port: 3306

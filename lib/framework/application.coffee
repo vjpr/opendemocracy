@@ -89,7 +89,8 @@ class Application
           @createServer newPort, server, app
       server.on 'listening', =>
         @onListening server, app
-        # Let others know that the server has started.
+        app.emit 'server:listening', server
+        # Let others (tests) know that the server has started.
         done()
     @createServer port, server, app
 
@@ -100,29 +101,6 @@ class Application
     port = server.address().port
     process.exit() unless port?
     logger.info "Express server listening on port #{port.toString().green.bold} in #{app.get('env')} mode"
-
-    # Socket.io
-    # ---------
-    sio = require 'socket.io'
-    io = sio.listen server
-    io.set 'log level', 1
-    io.set 'authorization', (data, accept) ->
-      if data.headers.cookie
-        data.cookie = require('connect').utils.parseCookie data.headers.cookie
-        data.sessionID = data.cookie['express.sid']
-        sessionStore.get data.sessionID, (err, session) ->
-          if err or not session
-            accept 'Error', false
-          else
-            data.session = session
-            accept null, true
-      else
-        return accept 'No cookie transmitted', false
-
-    io.sockets.on 'connection', (socket) ->
-      hs = socket.handshake
-      socket.on 'hello', ->
-        socket.emit 'hi'
 
 module.exports = Application
 

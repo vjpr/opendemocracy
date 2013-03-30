@@ -1,24 +1,23 @@
-logger = require('onelog').get 'Model'
+logger = require('onelog').get 'Mongo'
 mongoose = require 'mongoose'
 config = require('config')()
-bcrypt = require 'bcrypt'
 
-class Model
+class MongooseAdapter
 
   constructor: ->
 
-    User = require('../models/user')()
+    require('./models/user')()
 
     mongoose.set 'debug', true
 
     # So testing will work. Mocha keeps our app alive somehow.
-    unless mongoose.connection?
+    unless mongoose.connection.readyState is 1
 
-      logger.debug "Connecting to MongoDB at", @config.mongo.url
-      mongoose.connect config.mongo.url
+      logger.debug "Connecting to MongoDB at", config.database.mongo.url
+      mongoose.connect config.database.mongo.url
       mongoose.connection.on 'error', (err) ->
         logger.error "MongoDB connection error: " + err
       mongoose.connection.on 'open', ->
         logger.debug "Connected to MongoDB"
 
-exports.Model = Model
+module.exports = MongooseAdapter

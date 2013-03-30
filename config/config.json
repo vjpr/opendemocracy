@@ -1,0 +1,14 @@
+{
+  "development":{"username":"root",
+  "password":null,
+  "database":"expressbootstrap",
+  "host":"127.0.0.1"
+},
+  "test":{"username":"root",
+  "password":null,
+  "database":"expressbootstrap-test",
+  "host":"127.0.0.1"},
+  "production":{"username":"root",
+  "password":null,
+  "database":"expressbootstrap-prod",
+  "host":"127.0.0.1"}}
