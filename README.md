@@ -78,11 +78,11 @@ Visit <http://localhost:3030>
 
 ### Server
 
-    make testw
+    make test_watch
 
 ### Client
 
-`make testc` or visit <http://localhost:3030/test>.
+`make test_web` or visit <http://localhost:3030/test>.
 Make sure the server is running.
 
 ## Debug

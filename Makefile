@@ -6,38 +6,22 @@ run:
 
 	NODE_PATH='lib:app' nodemon --watch app --watch lib --watch framework --watch app.js app.js
 
-compile:
-
-	node app.js
-
 prod:
 
 	NODE_ENV=production node app.js
 
-debug-inspector:
-
-	node-inspector &
-
-debug1:
-
-	node --debug app
-
-debug-brk:
-
-	node --debug-brk app
-
 test:
 
-	@NODE_ENV=test ./node_modules/.bin/mocha $(arg)
+	@NODE_ENV=test NODE_PATH='lib:app' ./node_modules/.bin/mocha $(arg)
 
-testw:
+test_watch:
 
-	@NODE_ENV=test ./node_modules/.bin/mocha \
+	@NODE_ENV=test NODE_PATH='lib:app' ./node_modules/.bin/mocha \
 		--growl \
 		--watch
 
-testc:
+test_web:
 
 	open http://localhost:3030/test
 
-.PHONY: test testw testc run debug prod debug-inspector debug1 debug-brk compile
+.PHONY: debug run prod test test_watch test_web

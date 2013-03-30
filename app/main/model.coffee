@@ -7,7 +7,7 @@ class Model
 
   constructor: ->
 
-    User = require('./models/user')()
+    User = require('../models/user')()
 
     mongoose.set 'debug', true
 

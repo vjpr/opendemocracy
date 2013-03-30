@@ -11,8 +11,8 @@ chai = require 'chai'
 chai.should()
 expect = require('chai').expect
 
-config = require(path.join process.cwd(), '/config')('test')
-LiveApp = require(path.join process.cwd(), '/app/app')
+config = require('config')('test')
+LiveApp = require('main/app')
 
 # Integration testing.
 liveApp = LiveApp.start()

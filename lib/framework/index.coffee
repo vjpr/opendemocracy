@@ -1,11 +1,13 @@
-onelog = require 'onelog'
-onelog.use onelog.Log4js
-logger = require('onelog').get 'Framework'
+# Before we do anything we initialize our config and logging.
+config = require('config')()
+require('config/logging')()
+logger = require('onelog').get 'LiveFramework'
 resolvePath = (_path) -> require('path').join process.cwd(), 'app', _path
 path = require 'path'
 validator = require 'express-validator'
 flash = require 'connect-flash'
 express = require 'express'
+colors = require 'colors'
 
 @Live =
   Application: require './application'
@@ -16,7 +18,7 @@ express = require 'express'
     redis = require('redis-url').connect @config.redis.url
     @sessionStore = new RedisStore client: redis
   Mongoose: ->
-    {Model} = require resolvePath 'model'
+    {Model} = require 'main/model'
     model = new Model mongoUri: @config.mongo.url
   PassportAuth:
     Middleware: ->
@@ -65,4 +67,3 @@ express = require 'express'
     require 'express-resource'
     require 'colors'
   DefaultLogging: ->
-    onelog.use onelog.Log4js

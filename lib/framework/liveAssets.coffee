@@ -1,4 +1,5 @@
 logger = require('onelog').get 'Assets'
+mincerLogger = require('onelog').get 'Assets:Mincer'
 Assets = require 'live-assets'
 
 module.exports = ->
@@ -29,13 +30,17 @@ module.exports = ->
       'test.css'
     ]
     logger: logger
+    mincerLogger: mincerLogger
+    inPageErrorVerbosity: if @get('env') is 'production' then 'prod' else 'dev'
 
   # In development, precompile on every HTML request.
   @configure 'development', =>
     @use (req, res, next) ->
       isHTMLRequest = req.accepted[0].value is 'text/html'
       if isHTMLRequest
-        assets.precompileForDevelopment -> next()
+        assets.precompileForDevelopment (err) ->
+          return next err if err
+          next()
       else
         next()
 

@@ -1,11 +1,9 @@
-config = require('./index')()
 {Live} = require 'framework'
+config = require('config')()
 
 class @App extends Live.Application
 
   configure: ->
-    @enable Live.DefaultLogging
-    logger = require('onelog').get 'LiveFramework'
     @enable Live.DefaultLibraries
     @enable Live.Mongoose
     @enable Live.Assets
