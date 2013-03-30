@@ -15,6 +15,8 @@ class UserService
       cb null, user
 
   @findById: (id, fields, cb) ->
+    # This will clear session if we have an invalid id stored in session.
+    return cb(null, false) if typeof id is 'number'
     User.findById id, fields, cb
 
   @findOrCreate: (profile, cb) ->
