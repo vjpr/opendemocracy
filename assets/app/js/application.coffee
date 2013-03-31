@@ -7,7 +7,6 @@
 require = -> readFileSync: -> ''
 
 $(document).ready ->
-  console.log 'Loaded'
   # Client-side template functions are accessible as follows:
   # `JST['templates/home']()`
 

@@ -6,6 +6,7 @@
     "bootstrap": "~2.2.2",
     "backbone": "~0.9.9",
     "underscore": "~1.4.3",
-    "mocha": "~1.8.1"
+    "mocha": "~1.8.1",
+    "backbone.marionette": "~1.0.2"
   }
 }

@@ -17,7 +17,7 @@ Create a repo on GitHub for `yourappname`.
 
 ### Live Reload
 
-Add `yourappname` folder as a monitored folder in LiveReload. Exclude the `src` directory.
+Add `yourappname` folder as a monitored folder in LiveReload. Exclude the `app` directory.
 
 ## Setup
 
@@ -44,11 +44,11 @@ Fill in the following details at the bottom of the page.
       - localhost.yourappname.herokuapp.com
       - yourappname.herokuapp.com
 
-Paste `appId` and `appSecret` into `src/config.coffee`.
+Paste `appId` and `appSecret` into `app/config/credentials.coffee`.
 
-Modify `appName` in `src/config.coffee` to your Heroku app name.
+Modify `appName` in `app/common/config.coffee` to your Heroku app name.
 
-Modify `url` in `src/config.coffee` to your app domain.
+Modify `deployUrl` in `app/common/config.coffee` to your production app domain.
 
 Modify `name` in `package.json`.
 
@@ -78,7 +78,17 @@ Visit <http://localhost:3030>
 
 ### Server
 
+Run all tests
+
     make test_watch
+
+Only run integration tests (slower)
+
+    make test arg="-g Integration"
+
+Only run unit tests
+
+    make test arg="-g Unit"
 
 ### Client
 

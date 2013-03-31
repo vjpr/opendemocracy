@@ -32,7 +32,7 @@ merge = (srcs...) ->
     throw new Error "#{env} is not a valid environment"
 
   config = env: env
-  config = merge config, require('config/common')
+  config = merge config, require('config/common')(config)
   config = merge config, require("config/environments/#{env}")(config)
   , {database: extractSettingsForEnvironment(env, require('config/database')(config))}
   , {session: require('config/session')}

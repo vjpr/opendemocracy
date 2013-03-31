@@ -55,13 +55,14 @@ colors = require 'colors'
       res.locals.error = req.flash 'error'
       next()
   ErrorHandling: ->
-    @configure 'development', =>
-      @use express.errorHandler
-        dumpExceptions: true
-        showStack: true
-      @use express.logger()
-    @configure 'production', =>
-      @use express.errorHandler()
+    switch @app.get('env')
+      when 'development', 'test'
+        @use express.errorHandler
+          dumpExceptions: true
+          showStack: true
+        @use express.logger()
+      when 'production'
+        @use express.errorHandler()
   StandardRouter: ->
     @use @app.router
   DefaultLibraries: ->

@@ -1,6 +1,7 @@
 logger = require('onelog').get 'Assets'
 mincerLogger = require('onelog').get 'Assets:Mincer'
 Assets = require 'live-assets'
+jadeMultiEngine = require './jadeMultiEngine'
 
 module.exports = ->
   assets = new Assets
@@ -33,15 +34,18 @@ module.exports = ->
     mincerLogger: mincerLogger
     inPageErrorVerbosity: if @get('env') is 'production' then 'prod' else 'dev'
 
-  # In development, precompile on every HTML request.
-  @configure 'development', =>
-    @use (req, res, next) ->
-      isHTMLRequest = req.accepted[0].value is 'text/html'
-      if isHTMLRequest
-        assets.precompileForDevelopment (err) ->
-          return next err if err
+  assets.env.registerEngine '.mjade', jadeMultiEngine
+
+  # In development/test, precompile on every HTML request.
+  switch @app.get('env')
+    when 'development', 'test'
+      @use (req, res, next) ->
+        isHTMLRequest = req.accepted[0]?.value is 'text/html'
+        if isHTMLRequest
+          assets.precompileForDevelopment (err) ->
+            return next err if err
+            next()
+        else
           next()
-      else
-        next()
 
   assets.middleware @app

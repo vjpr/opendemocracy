@@ -34,7 +34,9 @@
     "express-validator": "*",
     "mixable": "~0.3.0",
     "zombie": "~1.4.1",
-    "sequelize": "~1.6.0-beta4"
+    "sequelize": "~1.6.0-beta4",
+    "mincer": "~0.4.5",
+    "async": "~0.2.6"
   },
   "devDependencies": {
     "mocha": "*",

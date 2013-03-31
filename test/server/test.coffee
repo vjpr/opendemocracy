@@ -19,7 +19,7 @@ liveApp = LiveApp.start()
 expressApp = liveApp.app
 #expressApp = require('http').createServer LiveApp.app()
 
-describe 'Server', ->
+describe 'Unit', ->
 
   #before (done) ->
     # Wait for a mongodb connection before running tests.
@@ -33,21 +33,22 @@ describe 'Server', ->
 describe 'Integration', ->
 
   before ->
+    @browser = new zombie.Browser headers: accept: 'text/html'
 
   it 'homepage title is correct', (done) ->
-    zombie.visit config.app.url, (e, browser) ->
+    @browser.visit config.app.url, (e, browser) ->
       return done e if e
       browser.text('title').should.equal config.appPrettyName
       done()
 
   it 'homepage heading is correct', (done) ->
-    zombie.visit config.app.url, (e, browser) ->
+    @browser.visit config.app.url, (e, browser) ->
       return done e if e
       browser.query('h1').innerHTML.should.equal config.appPrettyName
       done()
 
   it 'if not logged in, user should be redirected to login page', (done) ->
-    zombie.visit config.app.url + '/app', (e, browser) ->
+    @browser.visit config.app.url + '/app', (e, browser) ->
       return done e if e
       browser.query('.lead').innerHTML.should.equal 'To begin, login with Facebook.'
       done()

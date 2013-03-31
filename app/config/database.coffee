@@ -21,6 +21,10 @@ module.exports = (config) ->
       name: 'expressbootstrap'
       username: 'root'
       password: null
+    test:
+      name: 'expressbootstrap-test'
+      username: 'root'
+      password: null
     production:
       name: 'expressbootstrap'
       host: 'localhost'

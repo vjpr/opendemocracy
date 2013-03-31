@@ -18,7 +18,8 @@ test_watch:
 
 	@NODE_ENV=test NODE_PATH='lib:app' ./node_modules/.bin/mocha \
 		--growl \
-		--watch
+		--watch \
+		$(arg)
 
 test_web:
 
