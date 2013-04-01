@@ -3,6 +3,7 @@ parseHerokuPostgresConnectionString = (herokuUrl) ->
   dbUrl   = url.parse herokuUrl
   authArr = dbUrl.auth.split ':'
 
+  dbOptions = {}
   dbOptions.name          = dbUrl.path.substring(1)
   dbOptions.user          = authArr[0]
   dbOptions.pass          = authArr[1]
