@@ -16,9 +16,9 @@ module.exports = (model) ->
   c = config.database.sequelizePostgres
 
   sequelize = new Sequelize c.name, c.username, c.password,
-    host: c.host
-    port: c.port
-    dialect: c.dialect
+    host: c.host or 'localhost'
+    port: c.port or '5432'
+    dialect: c.dialect or 'postgres'
     protocol: c.protocol or 'tcp'
     pool: { maxConnections: 5, maxIdleTime: 30 }
     logging: (msg) -> logger.debug msg

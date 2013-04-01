@@ -31,8 +31,9 @@ class @DefaultLogging
 
   @devLevels:
     LiveFramework: 'DEBUG'
-    Assets: 'INFO'
+    Assets: 'DEBUG'
     'Assets:Mincer': 'ERROR'
 
   @prodLevels:
-    Assets: 'ERROR'
+    LiveFramework: 'INFO'
+    Assets: 'INFO'

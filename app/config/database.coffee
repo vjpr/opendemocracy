@@ -10,7 +10,7 @@ parseHerokuPostgresConnectionString = (herokuUrl) ->
   dbOptions.host          = dbUrl.hostname
   dbOptions.port          = dbUrl.port
   dbOptions.dialect       = 'postgres'
-  dbOptions.protocol      = 'postgres'
+  dbOptions.protocol      = 'tcp'
   dbOptions
 
 module.exports = (config) ->
