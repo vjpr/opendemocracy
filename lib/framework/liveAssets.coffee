@@ -32,8 +32,7 @@ module.exports = ->
     ]
     logger: logger
     mincerLogger: mincerLogger
-    #inPageErrorVerbosity: if @get('env') is 'production' then 'prod' else 'dev'
-    inPageErrorVerbosity: 'dev'
+    inPageErrorVerbosity: if @get('env') is 'production' then 'prod' else 'dev'
     afterEnvironmentCreated: ->
       @env.registerEngine '.mjade', jadeMultiEngine
 
