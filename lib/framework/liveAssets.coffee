@@ -34,8 +34,8 @@ module.exports = ->
     mincerLogger: mincerLogger
     #inPageErrorVerbosity: if @get('env') is 'production' then 'prod' else 'dev'
     inPageErrorVerbosity: 'dev'
-
-  assets.env.registerEngine '.mjade', jadeMultiEngine
+    afterEnvironmentCreated: ->
+      @env.registerEngine '.mjade', jadeMultiEngine
 
   # In development/test, precompile on every HTML request.
   switch @app.get('env')
