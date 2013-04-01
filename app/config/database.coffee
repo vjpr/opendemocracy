@@ -1,4 +1,23 @@
+parseHerokuPostgresConnectionString = (herokuUrl) ->
+  url     = require 'url'
+  dbUrl   = url.parse herokuUrl
+  authArr = dbUrl.auth.split ':'
+
+  dbOptions.name          = dbUrl.path.substring(1)
+  dbOptions.user          = authArr[0]
+  dbOptions.pass          = authArr[1]
+  dbOptions.host          = dbUrl.host
+  dbOptions.port          = null
+  dbOptions.dialect       = 'postgres'
+  dbOptions.protocol      = 'postgres'
+  dbOptions
+
 module.exports = (config) ->
+
+  postgresProd = if process.env.HEROKU_POSTGRESQL_MAROON_URL?
+    parseHerokuPostgresConnectionString process.env.HEROKU_POSTGRESQL_MAROON_URL
+  else
+    {}
 
   mongo:
     development:
@@ -26,10 +45,11 @@ module.exports = (config) ->
       username: null
       password: null
     production:
-      name: 'expressbootstrap'
-      username: null
-      password: null
-      host: process.env.HEROKU_POSTGRESQL_MAROON_URL
+      name: postgresProd.name
+      username: postgresProd.username
+      password: postgresProd.password
+      host: postgresProd.host
+      port: postgresProd.port
 
   sequelize_mysql:
     development:

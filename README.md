@@ -108,6 +108,16 @@ See <https://github.com/dannycoates/node-inspector>
 
 ### Heroku
 
+#### Configure Database
+
+For Postgresql databases:
+
+    https://devcenter.heroku.com/articles/heroku-postgresql#connecting-in-nodejs
+
+For MySql databases, create one on Amazon RDS.
+
+#### Push
+
   git push heroku master
 
 ### EC2
