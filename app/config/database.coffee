@@ -6,7 +6,7 @@ module.exports = (config) ->
     test:
       url: "mongodb://localhost/#{config.appName}-test"
     production:
-      url: process.env.MONGOLAB_URI or process.env.MONGOHQ_URL
+      url: process.env.MONGOLAB_URI or process.env.MONGOHQ_URL or "mongodb://localhost/#{config.appName}-prod"
 
   redis:
     development:
@@ -16,7 +16,22 @@ module.exports = (config) ->
     test:
       url: "localhost"
 
-  mysql:
+  sequelize:
+    development:
+      name: 'expressbootstrap'
+      username: null
+      password: null
+    test:
+      name: 'expressbootstrap-test'
+      username: null
+      password: null
+    production:
+      name: 'expressbootstrap'
+      username: null
+      password: null
+      host: process.env.HEROKU_POSTGRESQL_MAROON_URL
+
+  sequelize_mysql:
     development:
       name: 'expressbootstrap'
       username: 'root'
@@ -27,5 +42,5 @@ module.exports = (config) ->
       password: null
     production:
       name: 'expressbootstrap'
-      host: 'localhost'
-      port: 3306
+      username: null
+      password: null

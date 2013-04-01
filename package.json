@@ -21,7 +21,7 @@
     "q": "*",
     "colors": "*",
     "consolidate": ">= 0.5.0",
-    "live-assets": ">= 0.1.2",
+    "live-assets": ">= 0.1.7",
     "express-resource": ">= 1.0",
     "connect-flash": "*",
     "passport": "*",
@@ -36,7 +36,8 @@
     "zombie": "~1.4.1",
     "sequelize": "~1.6.0-beta4",
     "mincer": "~0.4.5",
-    "async": "~0.2.6"
+    "async": "~0.2.6",
+    "pg": "~0.15.1"
   },
   "devDependencies": {
     "mocha": "*",

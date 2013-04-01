@@ -13,11 +13,12 @@ module.exports = (model) ->
     else
       throw new Error 'The sequelize model did not exist', model
 
-  c = config.database.mysql
+  c = config.database.sequelize
 
   sequelize = new Sequelize c.name, c.username, c.password,
     host: c.host
     port: c.port
+    dialect: 'postgres'
     pool: { maxConnections: 5, maxIdleTime: 30 }
     logging: (msg) -> logger.debug msg
 
