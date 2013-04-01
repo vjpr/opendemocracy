@@ -53,6 +53,7 @@ module.exports = (config) ->
       password: postgresProd.password
       host: postgresProd.host
       port: postgresProd.port
+      protocol: 'postgres'
 
   sequelize_mysql:
     development:
