@@ -38,13 +38,15 @@ module.exports = (config) ->
     test:
       url: "localhost"
 
-  sequelize:
+  sequelizePostgres:
     development:
       name: 'expressbootstrap'
+      dialect: 'postgres'
       username: null
       password: null
     test:
       name: 'expressbootstrap-test'
+      dialect: 'postgres'
       username: null
       password: null
     production:
@@ -53,9 +55,10 @@ module.exports = (config) ->
       password: postgresProd.password
       host: postgresProd.host
       port: postgresProd.port
-      protocol: 'postgres'
+      protocol: postgresProd.protocol
+      dialect: postgresProd.protocol
 
-  sequelize_mysql:
+  sequelizeMysql:
     development:
       name: 'expressbootstrap'
       username: 'root'
