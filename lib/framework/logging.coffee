@@ -37,3 +37,4 @@ class @DefaultLogging
   @prodLevels:
     LiveFramework: 'INFO'
     Assets: 'INFO'
+    'Assets:Mincer': 'ERROR'
