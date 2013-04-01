@@ -20,8 +20,6 @@ module.exports = (config) ->
   else
     {}
 
-  console.log postgresProd
-
   mongo:
     development:
       url: "mongodb://localhost/#{config.appName}"
@@ -51,8 +49,8 @@ module.exports = (config) ->
       password: null
     production:
       name: postgresProd.name
-      username: postgresProd.username
-      password: postgresProd.password
+      username: postgresProd.user
+      password: postgresProd.pass
       host: postgresProd.host
       port: postgresProd.port
       protocol: 'tcp'
