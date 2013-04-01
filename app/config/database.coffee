@@ -55,8 +55,16 @@ module.exports = (config) ->
       password: postgresProd.password
       host: postgresProd.host
       port: postgresProd.port
-      protocol: postgresProd.protocol
-      dialect: postgresProd.protocol
+      protocol: 'tcp'
+      dialect: postgresProd.dialect
+    #production:
+    #  name: postgresProd.name
+    #  username: postgresProd.username
+    #  password: postgresProd.password
+    #  host: process.env.HEROKU_POSTGRESQL_MAROON_URL
+    #  port: postgresProd.port
+    #  protocol: postgresProd.protocol
+    #  dialect: postgresProd.dialect
 
   sequelizeMysql:
     development:
