@@ -78,6 +78,11 @@ class Application
     app = @app
     port = app.get('port')
     @server = server = require('http').createServer app
+    server.on 'listening', =>
+      @onListening server, app
+      app.emit 'server:listening', server
+      # Let others (tests) know that the server has started.
+      done()
     if app.get('env') isnt 'production'
       server.on 'error', (e) =>
         return unless config.app.tryOtherPortsIfInUse
@@ -87,11 +92,6 @@ class Application
           logger.warn "Port #{port.toString()} is in use. Trying port: #{newPort}"
           #server.close()
           @createServer newPort, server, app
-      server.on 'listening', =>
-        @onListening server, app
-        app.emit 'server:listening', server
-        # Let others (tests) know that the server has started.
-        done()
     @createServer port, server, app
 
   createServer: (port, server, app) ->
