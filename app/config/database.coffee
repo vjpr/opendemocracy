@@ -7,8 +7,8 @@ parseHerokuPostgresConnectionString = (herokuUrl) ->
   dbOptions.name          = dbUrl.path.substring(1)
   dbOptions.user          = authArr[0]
   dbOptions.pass          = authArr[1]
-  dbOptions.host          = dbUrl.host
-  dbOptions.port          = null
+  dbOptions.host          = dbUrl.hostname
+  dbOptions.port          = dbUrl.port
   dbOptions.dialect       = 'postgres'
   dbOptions.protocol      = 'postgres'
   dbOptions
@@ -19,6 +19,8 @@ module.exports = (config) ->
     parseHerokuPostgresConnectionString process.env.HEROKU_POSTGRESQL_MAROON_URL
   else
     {}
+
+  console.log postgresProd
 
   mongo:
     development:
