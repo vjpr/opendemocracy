@@ -1,7 +1,7 @@
 #= require underscore/underscore
 #= require backbone/backbone
 #= require jade-runtime
-#= require_tree ./templates
+#= require_tree ../templates
 
 # Workaround jade-runtime's use of `require`.
 require = -> readFileSync: -> ''

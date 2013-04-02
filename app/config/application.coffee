@@ -10,6 +10,7 @@ class @App extends Live.Application
     @enable Live.Assets
     @enable Live.RedisSession
     @enable Live.JadeTemplating
+    @enable Live.CoffeecupTemplating
     @enable Live.StandardPipeline
     @enable Live.PassportAuth.Middleware
     @enable Live.StandardRouter

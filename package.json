@@ -37,7 +37,8 @@
     "sequelize": "~1.6.0-beta4",
     "mincer": "~0.4.5",
     "async": "~0.2.6",
-    "pg": "~0.15.1"
+    "pg": "~0.15.1",
+    "coffeecup": "~0.3.19"
   },
   "devDependencies": {
     "mocha": "*",

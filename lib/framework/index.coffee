@@ -10,19 +10,24 @@ express = require 'express'
 colors = require 'colors'
 
 @Live =
+
   Application: require './application'
   Assets: require './liveAssets'
+
   RedisSession: ->
     express = require 'express'
     RedisStore = require('connect-redis')(express)
     redis = require('redis-url').connect @config.database.redis.url
     @sessionStore = new RedisStore client: redis
+
   Mongoose: ->
     MongooseAdapter = require 'mongooseDb'
     new MongooseAdapter mongoUri: @config.database.mongo.url
+
   Sequelize: ->
     SequelizeAdapter = require 'sequelizeDb'
     new SequelizeAdapter
+
   PassportAuth:
     Middleware: ->
       passport = require 'passport'
@@ -31,12 +36,18 @@ colors = require 'colors'
       @authController.setupMiddleware @app
     Routes: ->
       @authController.setupRoutes @app
+
   JadeTemplating: ->
     cons = require 'consolidate'
     path = require 'path'
     @app.engine 'jade', cons['jade']
     @set 'views', path.join process.cwd(), 'app/views'
     @set 'view engine', 'jade'
+
+  CoffeecupTemplating: ->
+    coffeecup = require 'coffeecup'
+    @app.engine 'ck', coffeecup.__express
+
   StandardPipeline: ->
     SITE_SECRET = 'yeah whatever'
     @use express.favicon()
@@ -54,6 +65,7 @@ colors = require 'colors'
       res.locals.info = req.flash 'info'
       res.locals.error = req.flash 'error'
       next()
+
   ErrorHandling: ->
     switch @app.get('env')
       when 'development', 'test'
@@ -63,11 +75,14 @@ colors = require 'colors'
         @use express.logger()
       when 'production'
         @use express.errorHandler()
+
   StandardRouter: ->
     @use @app.router
+
   DefaultLibraries: ->
     # These libraries add hooks into express and references to them are not
     # always needed.
     require 'express-resource'
     require 'colors'
+
   DefaultLogging: ->

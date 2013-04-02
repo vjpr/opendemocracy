@@ -2,11 +2,13 @@ logger = require('onelog').get 'Assets'
 mincerLogger = require('onelog').get 'Assets:Mincer'
 Assets = require 'live-assets'
 jadeMultiEngine = require './jadeMultiEngine'
+coffeecupEngine = require './coffeecupEngine'
 
 module.exports = ->
   assets = new Assets
     paths: [
       'assets/app/js'
+      'assets/app/templates'
       'assets/app/css'
       'assets/vendor/js'
       'assets/vendor/css'
@@ -35,6 +37,7 @@ module.exports = ->
     inPageErrorVerbosity: if @get('env') is 'production' then 'prod' else 'dev'
     afterEnvironmentCreated: ->
       @env.registerEngine '.mjade', jadeMultiEngine
+      @env.registerEngine '.ck', coffeecupEngine
 
   # In development/test, precompile on every HTML request.
   switch @app.get('env')
