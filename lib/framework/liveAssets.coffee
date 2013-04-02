@@ -1,8 +1,8 @@
 logger = require('onelog').get 'Assets'
 mincerLogger = require('onelog').get 'Assets:Mincer'
 Assets = require 'live-assets'
-jadeMultiEngine = require './jadeMultiEngine'
-coffeecupEngine = require './coffeecupEngine'
+jadeMultiEngine = require './assets/jadeMultiEngine'
+coffeecupEngine = require './assets/coffeecupEngine'
 
 module.exports = ->
   assets = new Assets

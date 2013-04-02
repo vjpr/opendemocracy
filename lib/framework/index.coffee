@@ -29,11 +29,13 @@ colors = require 'colors'
     new SequelizeAdapter
 
   PassportAuth:
+
     Middleware: ->
       passport = require 'passport'
-      AuthController = require './passportAuth'
+      AuthController = require './auth/passportAuth'
       @authController = new AuthController
       @authController.setupMiddleware @app
+
     Routes: ->
       @authController.setupRoutes @app
 

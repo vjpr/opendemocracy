@@ -10,7 +10,7 @@ class @App extends Live.Application
     @enable Live.Assets
     @enable Live.RedisSession
     @enable Live.JadeTemplating
-    @enable Live.CoffeecupTemplating
+    #@enable Live.CoffeecupTemplating
     @enable Live.StandardPipeline
     @enable Live.PassportAuth.Middleware
     @enable Live.StandardRouter
@@ -18,7 +18,10 @@ class @App extends Live.Application
     @enable require './routes'
     @enable Live.PassportAuth.Routes
     @app.on 'server:listening', (server) =>
-      SocketsManager = require 'sockets/socketsManager'
-      new SocketsManager server, @sessionStore
+      SocketsManager = require 'framework/sockets/socketsManager'
+      new SocketsManager server, @sessionStore,
+        onConnection: (socket) ->
+          SocketsConnection = require 'sockets/socketsConnection'
+          new SocketsConnection socket
     @app.locals title: config.appPrettyName
     @app

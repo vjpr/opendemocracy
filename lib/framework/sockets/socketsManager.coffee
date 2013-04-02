@@ -1,18 +1,14 @@
 logger = require('onelog').get 'SocketsManager'
 _ = require 'underscore'
 sio = require 'socket.io'
-mongoose = require 'mongoose'
 url = require 'url'
 connect = require 'connect'
 cookie = require 'cookie'
 config = require('config')()
 
-User = mongoose.model 'User'
-SocketsConnection = require 'sockets/socketsConnection'
-
 class SocketsManager
 
-  constructor: (server, sessionStore) ->
+  constructor: (server, sessionStore, opts = {}) ->
     @io = io = sio.listen server
     logger.debug 'Socket.IO is listening for connections'
     io.set 'log level', 1
@@ -34,10 +30,7 @@ class SocketsManager
             accept null, true
       else
         return accept 'No cookie transmitted', false
-    io.sockets.on 'connection', @onConnection
+    io.sockets.on 'connection', opts.onConnection
     @
-
-  onConnection: (socket) =>
-    new SocketsConnection socket
 
 module.exports = SocketsManager
