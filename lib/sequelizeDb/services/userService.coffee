@@ -15,12 +15,14 @@ class UserService
       cb null, user
 
   @findById: (id, fields, cb) ->
+    unless cb? then cb = fields
     User.find(parseInt(id)).success (data) -> cb null, data
 
   @findOrCreate: (profile, cb) ->
     User.findOrCreate profile, cb
 
   @findOne: (params, fields, cb) ->
+    unless cb? then cb = fields
     User.find(params).success (data) -> cb null, data
 
   @create: (params, cb) ->

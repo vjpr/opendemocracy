@@ -63,7 +63,7 @@ class PassportSupport
   # Used by Passport to authenticate login requests.
   authenticate: (email, password, done) =>
     logger.debug "Authentication starting now"
-    User.findOne {email}, allowedUserFields, (err, user) ->
+    User.findOne {email}, (err, user) ->
       if err
         logger.debug "Authentication failed: Server error:", err
         return done err
@@ -76,7 +76,7 @@ class PassportSupport
         logger.debug "Authentication failed: #{message}"
         return done null, false, {message}
       else
-        logger.debug "Authentication successful:", user
+        logger.debug "Authentication successful:", user.email
         return done null, user
 
   serialize: (user, done) =>

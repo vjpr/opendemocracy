@@ -12,3 +12,7 @@ npm-debug.log
 
 # Bower Components
 /assets/components
+
+# OSX
+.DS_STORE
+*.rdb

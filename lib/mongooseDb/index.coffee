@@ -8,7 +8,7 @@ class MongooseAdapter
 
     require('./models/user')()
 
-    mongoose.set 'debug', true
+    mongoose.set 'debug', config.database.mongo?.debug or true
 
     # So testing will work. Mocha keeps our app alive somehow.
     unless mongoose.connection.readyState is 1

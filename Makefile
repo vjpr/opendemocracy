@@ -1,10 +1,10 @@
-debug:
-
-	NODE_PATH='lib:app' nodemon --watch app --watch lib --debug app.js
-
 run:
 
 	NODE_PATH='lib:app' nodemon --watch app --watch lib app.js
+
+debug:
+
+	NODE_PATH='lib:app' nodemon --watch app --watch lib --debug app.js
 
 prod:
 
@@ -25,4 +25,4 @@ test_web:
 
 	open http://localhost:3030/test
 
-.PHONY: debug run prod test test_watch test_web
+.PHONY: run debug prod test test_watch test_web

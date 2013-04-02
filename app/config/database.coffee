@@ -23,10 +23,13 @@ module.exports = (config) ->
   mongo:
     development:
       url: "mongodb://localhost/#{config.appName}"
+      debug: true
     test:
       url: "mongodb://localhost/#{config.appName}-test"
+      debug: true
     production:
       url: process.env.MONGOLAB_URI or process.env.MONGOHQ_URL or "mongodb://localhost/#{config.appName}-prod"
+      debug: false
 
   redis:
     development:

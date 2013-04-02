@@ -6,7 +6,7 @@ class @App extends Live.Application
   configure: ->
     @enable Live.DefaultLibraries
     @enable Live.Mongoose
-    @enable Live.Sequelize
+    #@enable Live.Sequelize
     @enable Live.Assets
     @enable Live.RedisSession
     @enable Live.JadeTemplating
