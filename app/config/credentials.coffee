@@ -1,4 +1,4 @@
 module.exports =
   fb:
-    appId: '451899438203860' # TODO
-    appSecret: '0a05a69a5d56da18ee2a1ffd9f53ecda' # TODO
+    appId: '426407907429585'
+    appSecret: 'cba615f51002adb3410769951b33b041'
