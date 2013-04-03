@@ -5,3 +5,6 @@ module.exports = (config) ->
   assets:
     #remoteAssetsUrl: "http://#{config.appName}.s3-website-ap-southeast-2.amazonaws.com/"
     remoteAssetsUrl: "http://#{config.appName}.herokuapp.com/"
+    expandTags: false
+    usePrecompiledAssets: true
+    inPageErrorVerbosity: 'prod'

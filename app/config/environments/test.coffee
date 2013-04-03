@@ -4,3 +4,6 @@ module.exports = (config) ->
     url: "http://localhost.#{config.appName}.herokuapp.com:9999"
   assets:
     remoteAssetsUrl: "/"
+    expandTags: false
+    usePrecompiledAssets: true
+    inPageErrorVerbosity: 'dev'

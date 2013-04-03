@@ -5,3 +5,6 @@ module.exports = (config) ->
     tryOtherPortsIfInUse: true
   assets:
     remoteAssetsUrl: "/"
+    expandTags: true
+    usePrecompiledAssets: false
+    inPageErrorVerbosity: 'dev'
