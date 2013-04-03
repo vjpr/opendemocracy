@@ -1,6 +1,7 @@
 logger = require('onelog').get 'LiveFramework'
 config = require('config')()
 express = require 'express'
+require 'express-resource'
 #{Mixable} = require 'mixable'
 _ = require 'underscore'
 

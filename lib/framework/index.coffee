@@ -84,7 +84,6 @@ colors = require 'colors'
   DefaultLibraries: ->
     # These libraries add hooks into express and references to them are not
     # always needed.
-    require 'express-resource'
     require 'colors'
 
   DefaultLogging: ->

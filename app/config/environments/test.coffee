@@ -3,4 +3,4 @@ module.exports = (config) ->
     port: 9999
     url: "http://localhost.#{config.appName}.herokuapp.com:9999"
   assets:
-   remoteAssetsUrl: "/"
+    remoteAssetsUrl: "/"
