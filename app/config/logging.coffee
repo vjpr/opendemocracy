@@ -13,7 +13,7 @@ module.exports = (env) ->
   switch env
 
     when 'production', 'staging'
-      log4js.setGlobalLogLevel 'INFO'
+      log4js.setGlobalLogLevel 'TRACE'
       log4js.configure
         appenders: DefaultLogging.productionAppender
         levels: _.extend DefaultLogging.prodLevels, {} # TODO: Add new levels here.
