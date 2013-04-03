@@ -15,7 +15,7 @@ parseHerokuPostgresConnectionString = (herokuUrl) ->
 
 module.exports = (config) ->
 
-  herokuPostgresUrl = process.env.HEROKU_POSTGRESQL_COPPER_URL
+  herokuPostgresUrl = process.env.DATABASE_URL
 
   postgresProd = if herokuPostgresUrl?
     parseHerokuPostgresConnectionString herokuPostgresUrl
