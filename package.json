@@ -50,7 +50,10 @@
   "devDependencies": {
     "mocha": "*",
     "chai": "*",
-    "supertest": "*"
+    "supertest": "*",
+    "grunt": "*",
+    "grunt-contrib-coffee": "~0.6.7",
+    "grunt-contrib-copy": "~0.4.1"
   },
   "engines": {
     "node": "0.8.x",
