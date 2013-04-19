@@ -1,4 +1,5 @@
 node_modules/
+build/
 
 # Temp
 .vagrant
@@ -9,6 +10,7 @@ npm-debug.log
 # IntelliJ
 .idea/workspace.xml
 .idea/tasks.xml
+*.map
 
 # Bower Components
 /assets/components
