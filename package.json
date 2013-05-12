@@ -18,13 +18,14 @@
     "q": "*",
     "colors": "*",
     "consolidate": ">= 0.5.0",
-    "live-assets": ">= 0.1.7",
+    "live": "https://github.com/vjpr/live.git",
+    "live-assets": "https://github.com/vjpr/live-assets.git",
     "express-resource": ">= 1.0",
     "connect-flash": "*",
     "passport": "*",
     "passport-local": "*",
     "passport-facebook": "*",
-    "onelog": "*",
+    "onelog": "https://github.com/vjpr/onelog.git",
     "log4js": "*",
     "bcrypt": "*",
     "bower": "*",
@@ -44,7 +45,8 @@
     "redis": "~0.8.3",
     "marked": "~0.2.8",
     "rosetta": "~0.1.1",
-    "watchr": "~2.4.3"
+    "watchr": "~2.4.3",
+    "flat-ui-pro": "https://www.dropbox.com/s/k55wz1flss1pmw4/flat-ui-pro.tar.gz"
   },
   "devDependencies": {
     "mocha": "*",
