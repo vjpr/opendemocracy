@@ -1,3 +1,8 @@
+mixin avatar(name, avatar)
+  div(style='margin: 10px 0')
+    .avatar(style='background-image: url(#{avatar})')
+    .small=name
+
 #prop
   .row.buffer: .span12
     h3= name
@@ -28,10 +33,11 @@
         div.text-center
           div You
           div ↓
-          div Malcolm Turnbull
+          +avatar('Malcolm Turnbull', 'https://si0.twimg.com/profile_images/3077056429/d4ba7af0567e896bb9eb7bad10ffa54d.jpeg')
           div ↓
-          div Tony Abbott
+          +avatar('Tony Abbott', 'https://si0.twimg.com/profile_images/1703647247/2267.jpg')
           div ↓
+          br
           div: strong Yes
 
       .well

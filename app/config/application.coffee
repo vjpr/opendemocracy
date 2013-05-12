@@ -1,4 +1,4 @@
-require 'coffee-trace'
+#require 'coffee-trace'
 logger = require('onelog').get()
 {Live} = require 'live'
 config = require('config')()
@@ -24,7 +24,7 @@ class @App extends Live.Application
     onelog = require 'onelog'
     log4js = onelog.getLibrary()
     connectLogger = require('onelog').get 'connect'
-    @use log4js.connectLogger connectLogger, level: log4js.levels.INFO
+    @use log4js.connectLogger connectLogger, level: log4js.levels.INFO, format: ':method :url'
     # ---
 
     @enable Live.RedisSession

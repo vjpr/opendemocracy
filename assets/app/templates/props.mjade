@@ -1,19 +1,34 @@
-//- [table]
-h1.title= title
-
-//.pagination: ul
-  li: a.js-prev(href='#props') Prev
-  li: a.js-next(href='#props') Next
-
-table.table.table-striped.table-bordered
-  thead: tr
-    th Title
-    th Date
-  tbody
-    //- [item]
-    tr
-      td
-        a(href='#props/1')= title
-        //pre= JSON.stringify(locals,null,2)
-      td: abbr.timeago(title=date)
-
+#props
+  .content
+    //- [table]
+    .group
+      h4= title
+      p= description
+      table.table.table-striped
+        thead: tr
+          th Title
+          th Date
+          th Your Vote
+        tbody
+          //- [item]
+          tr
+            td.title
+              a(href='#props/#{title}')= title
+              //pre= JSON.stringify(locals,null,2)
+            td: abbr.timeago(title=date)
+            td.your-vote
+              if locals.vote
+                .delegate-avatar(style="background-image: url('#{vote.delegateAvatar}')")
+                .delegate
+                  div #{vote.delegate} &nbsp;→&nbsp;
+                  .links via 3 delegations
+                case vote.grade
+                  when 'Yes'
+                    i.fui-check-inverted.text-success
+                  when 'No'
+                    i.fui-cross-inverted.text-danger
+              else
+                | N/A
+      .pagination: ul
+        li: a.js-prev.fui-arrow-left
+        li: a.js-next.fui-arrow-right

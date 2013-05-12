@@ -7,7 +7,6 @@
 #= require backbone-pageable
 #= require jquery-timeago/jquery.timeago
 #= require holderjs
-#= require jquery.infinitescroll
 # require debug/debug
 
 # Workaround jade-runtime's use of `require`.
@@ -46,20 +45,44 @@ class Router extends B.Router
     'props': 'props'
     'props/:id': 'prop'
 
-  prop: =>
+  prop: (id) =>
     console.log '!'
-    model = new PropModel id: 1
+    model = new PropModel {id}
     view  = new PropView {model}
     model.fetch()
     app.views.main.content.show view
 
   props: =>
     app.collections.props = new PropsCollection
-    app.views.propsCollectionView = new PropsCollectionView
-      collection: app.collections.props.fullCollection
-      model: new B.Model title: 'Propositions'
-    app.collections.props.getFirstPage()
-    app.views.main.content.show app.views.propsCollectionView
+
+    app.views.bills = {}
+
+    views =
+      actionRequired:
+        title: 'Action required'
+        description: 'You need to decide how you want to vote on these bills'
+      #reviewRequired:
+      #  title: 'Review required'
+      #  description: 'You need to decide how you want to vote on these bills'
+      reviewed:
+       title: 'Reviewed'
+       description: 'Waiting for voting to finish for these bills'
+      past:
+        title: 'Past'
+        description: 'Voting has finished on these bills'
+
+    viewColl = new B.Collection
+    for k, v of views
+      coll = new PropsCollection [], queryParams: filter: k
+      viewColl.add
+        model: new B.Model v
+        collection: coll
+
+    app.views.propsView = new PropsView collection: viewColl
+    app.views.main.content.show app.views.propsView
+
+    viewColl.each (model) ->
+      model.get('collection').getFirstPage()
 
 class MainLayout extends BM.Layout
   el: '#main'
@@ -80,7 +103,7 @@ class PropsCollection extends B.PageableCollection
   state:
     firstPage: 1
     currentPage: 1
-    #pageSize: 20
+    pageSize: 5
 
   queryParams:
     currentPage: 'page'
@@ -91,6 +114,34 @@ class PropRowView extends BM.ItemView
   onRender: =>
     @setElement @$el.children()
     @$('abbr.timeago').timeago()
+
+
+
+#class LoadingMessageView extends BM.ItemView
+#  template: -> "Loading!"
+
+class PagedCollectionView extends BM.CompositeView
+  template: JST['props/table']
+  itemView: PropRowView
+  itemViewContainer: 'tbody'
+  ui:
+    prev: '.js-prev'
+    next: '.js-next'
+  onRender: =>
+    @ui.prev.on 'click', =>
+      @collection.getPreviousPage()
+    @ui.next.on 'click', =>
+      @collection.getNextPage()
+
+
+class PropsView extends BM.CompositeView
+  template: JST['props']
+  itemView: PagedCollectionView
+  itemViewContainer: '.content'
+  itemViewOptions: (model, index) ->
+    model: model.get 'model'
+    collection: model.get 'collection'
+
 
 class PropsCollectionView extends BM.CompositeView
   template: JST['props/table']

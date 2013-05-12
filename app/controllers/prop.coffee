@@ -5,6 +5,7 @@ cache = redback.createCache('opendem-dev')
 _ = require 'underscore'
 config = require('config')()
 path = require 'path'
+logger = require('onelog').get 'PropController'
 
 # Libs.
 {ParlInfo} = require 'op-tools/aph/parlinfo'
@@ -37,11 +38,33 @@ paginate = (req, res, items) ->
 module.exports = class Prop
 
   @index: (req, res, next) ->
+    filter = req.query.filter
     key = 'initiative/index'
     send = (bills) ->
       bills = JSON.parse bills
       paginate req, res, bills
-      console.log 'Showing bills from', res.locals.from, res.locals.to
+
+      bills = switch filter
+        when 'actionRequired'
+          bills
+        when 'reviewed'
+          # Debug.
+          bills.map (item) ->
+            rand = Math.floor((Math.random()*2)+1);
+            item.vote = switch rand
+              when 1
+                grade: 'Yes'
+                delegate: 'Malcolm Turnbull'
+                delegateAvatar: 'https://si0.twimg.com/profile_images/3077056429/d4ba7af0567e896bb9eb7bad10ffa54d.jpeg'
+              when 2
+                grade: 'No'
+                delegate: 'Tony Abbott'
+                delegateAvatar: 'https://si0.twimg.com/profile_images/1703647247/2267.jpg'
+            item
+        when 'past'
+          bills
+
+      logger.debug 'Showing bills from', res.locals.from, res.locals.to
       res.send bills.slice res.locals.from, res.locals.to
 
     #res.send generateFakeInitiatives()
@@ -54,12 +77,18 @@ module.exports = class Prop
     send bills
 
   @show: (req, res, next) ->
+    id = req.params.prop
+
     bill = require 'op-tools/aph/test/fixtures'
     fs = require 'fs'
     path = require 'path'
     #html = fs.readFileSync path.join(process.cwd(), 'test/server/fixtures/ndis-bill.html'), 'utf-8'
 
-    file = path.join(config.law.repoPath, '/m/Marriage-Act-1961/index.md')
+    safeId = 'Marriage-Act-1961'
+    safeId = id.replace /[^a-zA-Z0-9_\-\.]/g, '-'
+    firstLetter = safeId.charAt(0)
+
+    file = path.join config.law.repoPath, "/#{firstLetter}/#{safeId}/index.md"
     md = fs.readFileSync file, 'utf8'
     marked = require 'marked'
     html = marked md
@@ -73,7 +102,7 @@ module.exports = class Prop
       "<span style='width: #{count}em'></span>"
 
     res.send
-      name: 'National Disability Insurance Scheme 2013'
+      name: id
       prop: bill
       html: html
 
