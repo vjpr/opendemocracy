@@ -46,7 +46,7 @@
     "marked": "~0.2.8",
     "rosetta": "~0.1.1",
     "watchr": "~2.4.3",
-    "flat-ui-pro": "https://www.dropbox.com/s/k55wz1flss1pmw4/flat-ui-pro.tar.gz"
+    "flat-ui-pro": "https://dl.dropboxusercontent.com/s/k55wz1flss1pmw4/flat-ui-pro.tar.gz?token_hash=AAHMbL8hTFac01xbUo7zeRSwUnzWZ5wDIeYvEAaW0Bhu-g"
   },
   "devDependencies": {
     "mocha": "*",
