@@ -1,8 +1,93 @@
 //= require ./bootstrap
 
-body
-  padding: 50px
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+// Enable for Flat UI Pro.
+//= require ./flat-ui
+//= require flat-ui/config
+
+// Enable for Flat UI Free.
+// require css/flat-ui.css
+
+//body
+//  padding: 50px
+//  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
+
+@import 'flat-ui/config'
+@import url(http://fonts.googleapis.com/css?family=Open+Sans)
 
 ul#errors.alert
   list-style-type: none !important
+
+section
+  padding-top: 30px
+
+// TODO: Give it its own id.
+#main
+  table td
+    white-space: nowrap
+
+
+#prop
+  iframe
+    border: none
+    width: 100%
+    height: 1000px
+  .voting-buttons > div
+    margin-top: 10px
+
+a
+  text-decoration: none
+
+.buffer
+  margin-top: 40px
+  margin-bottom: 30px
+
+.hompage-section
+  padding: 40px inherit
+
+.homepage-text > p
+  font: 14px/24px "Helvetica Neue",Helvetica,Arial,Sans-serif !important
+  color: silver
+
+.bottom-menu
+  .brand > a
+    font-size: 13px
+
+.brand
+  a
+    text-transform: uppercase
+    font-weight: 700
+    font-style: italic
+    letter-spacing: 0.5em
+    font-size: 16px
+    white-space: nowrap
+    .open
+      color: $firm
+    .democracy
+      color: silver
+
+.homepage-navbar
+  margin-bottom: 0px
+
+.navbar-inner
+  border-radius: 0px
+
+.hero-unit
+  background-color: $firm
+  border-radius: 0px
+  color: white
+
+.homepage-lead
+  .lead
+    color: $silver
+    font-size: 16/20px
+
+#main
+  min-height: 600px
+
+// --
+#prop
+  p:hover > span
+    background-color: #fffcef
+    border-bottom: 1px dotted #fc0
+    cursor: default
+

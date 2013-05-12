@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "dependencies": {
     "jquery": "~1.8.3",
-    "bootstrap": "~2.2.2",
+    "bootstrap": "*",
     "backbone": "*",
-    "underscore": "~1.4.3",
-    "mocha": "~1.8.1",
-    "backbone.marionette": "~1.0.2"
+    "underscore": "*",
+    "mocha": "*",
+    "backbone.marionette": "*",
+    "jquery-timeago": "~1.1.0",
+    "backbone.paginator": "latest",
+    "backbone-pageable": "~1.2.3",
+    "debug": "latest"
   }
 }

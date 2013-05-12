@@ -1,12 +1,15 @@
-colors = require 'colors'
-onelog = require 'onelog'
+require 'colors'
 _ = require 'underscore'
 config = require('config')()
+
+onelog = require 'onelog'
 log4js = require 'log4js'
-{DefaultLogging} = require 'framework/logging'
+onelog.use onelog.Log4js, lib: log4js
+{DefaultLogging} = require 'live/logging'
 
 module.exports = (env) ->
   env = config.env unless env?
+
   #log4js.replaceConsole()
   log4js.setGlobalLogLevel 'INFO'
 
@@ -29,5 +32,3 @@ module.exports = (env) ->
       log4js.configure
         appenders: DefaultLogging.developmentAppender
         levels: {} # TODO: Add new levels here.
-
-  onelog.use onelog.Log4js

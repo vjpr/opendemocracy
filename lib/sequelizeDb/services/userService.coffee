@@ -1,5 +1,5 @@
 sequelizeDb = require '../index'
-User = sequelizeDb 'User'
+User = sequelizeDb.model 'User'
 
 users = {}
 

@@ -1,6 +1,17 @@
 extend layout
 block main
-  p
-    | You are now logged in as&nbsp;
-    != user.getDisplayName()
-  a(href="/logout") Log Out
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container
+        .brand: a(href='/'): +logo
+        ul.nav
+          li.active: a(href='#') Home
+          li: a(href='#props') Props
+        ul.nav.pull-right
+          li: a(href='/logout') Logout
+
+  .container(style='margin-top: 50px')
+    .row
+      .span12
+        section#main
+

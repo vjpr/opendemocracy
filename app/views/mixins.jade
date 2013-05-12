@@ -1,0 +1,17 @@
+mixin home-section
+  hr
+  .hompage-section.row
+    block
+
+mixin home-image(height)
+  - height = height || 200
+  .span4: .thumbnail: img(data-src='holder.js/300x#{height}')
+
+mixin home-text(title)
+  .span4
+    .lead= title
+    .homepage-text: block
+
+mixin logo
+  span.open Open
+  span.democracy Democracy

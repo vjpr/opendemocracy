@@ -1,0 +1,48 @@
+#prop
+  .row.buffer: .span12
+    h3= name
+    if locals.prop
+      .lead= prop.meta.Portfolio
+  .row
+    .span8
+      ul.nav.nav-tabs
+        li.active: a(href='#') View Amended Act
+        li: a(href='#') View Changes
+        li: a(href='#') Discuss
+        li: a(href='#') Vote
+      //iframe
+      .js-bill
+      pre= JSON.stringify(locals,null,2)
+
+    .offset1.span3
+      br
+      br
+      .well
+        strong You are currently voting&nbsp;
+        strong(style='color:green') yes
+        br
+        br
+        strong Your vote is being delegated as follows:
+        br
+        br
+        div.text-center
+          div You
+          div ↓
+          div Malcolm Turnbull
+          div ↓
+          div Tony Abbott
+          div ↓
+          div: strong Yes
+
+      .well
+        strong CAST YOUR VOTE
+        br
+        .voting-buttons
+          div: button.btn.btn-large.btn-success Vote Yes
+          div: button.btn.btn-large.btn-danger Vote No
+          div: button.btn.btn-large.btn-warning Abstain
+          div: button.btn.btn-large.btn-info Delegate
+
+      ul.nav.nav-tabs.nav-stacked
+        li: a(href="#") Home
+        li: a(href="#") Profile

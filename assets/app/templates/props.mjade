@@ -1,0 +1,19 @@
+//- [table]
+h1.title= title
+
+//.pagination: ul
+  li: a.js-prev(href='#props') Prev
+  li: a.js-next(href='#props') Next
+
+table.table.table-striped.table-bordered
+  thead: tr
+    th Title
+    th Date
+  tbody
+    //- [item]
+    tr
+      td
+        a(href='#props/1')= title
+        //pre= JSON.stringify(locals,null,2)
+      td: abbr.timeago(title=date)
+

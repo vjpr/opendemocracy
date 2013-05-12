@@ -12,3 +12,4 @@ module.exports = ->
   @get '/app', ensureAuthenticated, require(controller 'appController').app
   @get '/admin', require(controller 'adminController').index
   @get '/test', require(controller 'testController').allTests
+  @app.resource 'props', require(controller 'prop')

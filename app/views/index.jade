@@ -1,4 +1,67 @@
 extend layout
 block main
-  h1= title
-  a(href="/app") Login
+  .navbar.homepage-navbar
+    .navbar-inner
+      .container
+        .brand: a(href='#'): +logo
+        ul.nav.pull-right(style='padding-right: 20px')
+          if user
+            li
+              a(href='/app')= user.name
+          else
+            li: a(href='/app') Login
+  .hero-unit.text-center
+    br
+    h1 Democracy
+    .lead δημοκρατία (dēmokratía) "rule of the people"
+    br
+    .control-group.large
+      input.span4(type='text', placeholder='Email')
+      div(style='display: inline-block; width: 10px')
+      .btn.btn-large.btn-default Sign Up
+  .container
+    .row
+      .offset2.span8
+
+        .row.text-center.homepage-lead
+          h6
+            strong An online platform for running a new breed of political party
+          .lead Change the world
+
+        +home-section
+          +home-text('Open Source')
+            p Built on the foundations of open-source software. If a group of members don't like the power structures within a party, they can create their own party with minimal effort.
+
+            p Parties can always merge back at a later time, or form alliances to vote together on certain issues.
+
+            br
+            a More on Open Source
+          +home-image(300)
+
+        +home-section
+          +home-image
+          +home-text('Transparent')
+            p Everything that happens within the party at meetings and discussions is publically accessible. Power structures and voting records of delegates are also visible.
+            br
+            a More on Transparency
+
+        +home-section
+          +home-text('Collaborative')
+            p The same cutting-edge tools used to build open-source software are made available for collaborating on policy through a laymen-friendly interface.
+            br
+            a More on Collaboration
+          +home-image
+
+        +home-section
+          +home-image
+          +home-text('Voter Freedom')
+            p Vote with the greatest level of freedom. Vote directly on every issue, or delegate your vote to someone you trust separately for each policy area.
+            br
+            a More on Delegative Democracy
+
+        +home-section
+          +home-text('Rationale Discussion')
+            p Built to encourage fact-based discussion and logical argumentation when forming policies.
+            br
+            a More on Rationale Discussion
+          +home-image

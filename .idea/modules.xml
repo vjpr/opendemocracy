@@ -2,7 +2,14 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/app.iml" filepath="$PROJECT_DIR$/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Flat-UI/Flat-UI.iml" filepath="$PROJECT_DIR$/../Flat-UI/Flat-UI.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../live-bootstrap/app.iml" filepath="$PROJECT_DIR$/../live-bootstrap/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../flat-ui-pro/flat-ui-pro.iml" filepath="$PROJECT_DIR$/../flat-ui-pro/flat-ui-pro.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../live/live.iml" filepath="$PROJECT_DIR$/../live/live.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../live-assets/live-assets.iml" filepath="$PROJECT_DIR$/../live-assets/live-assets.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../mincer/mincer-vjpr.iml" filepath="$PROJECT_DIR$/../mincer/mincer-vjpr.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../onelog/onelog.iml" filepath="$PROJECT_DIR$/../onelog/onelog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/opendemocracy.iml" filepath="$PROJECT_DIR$/opendemocracy.iml" />
     </modules>
   </component>
 </project>

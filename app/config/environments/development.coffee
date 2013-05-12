@@ -8,3 +8,6 @@ module.exports = (config) ->
     expandTags: true
     usePrecompiledAssets: false
     inPageErrorVerbosity: 'dev'
+  law:
+    repoPath: '/Users/Vaughan/tmp/main/masterRepo'
+    filesPath: '/Users/Vaughan/tmp/main'
