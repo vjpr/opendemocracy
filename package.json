@@ -46,7 +46,8 @@
     "marked": "~0.2.8",
     "rosetta": "~0.1.1",
     "watchr": "~2.4.3",
-    "flat-ui-pro": "https://dl.dropboxusercontent.com/s/k55wz1flss1pmw4/flat-ui-pro.tar.gz?token_hash=AAHMbL8hTFac01xbUo7zeRSwUnzWZ5wDIeYvEAaW0Bhu-g"
+    "flat-ui-pro": "https://dl.dropboxusercontent.com/s/k55wz1flss1pmw4/flat-ui-pro.tar.gz?token_hash=AAHMbL8hTFac01xbUo7zeRSwUnzWZ5wDIeYvEAaW0Bhu-g",
+    "iced-coffee-script": "~1.6.2b"
   },
   "devDependencies": {
     "mocha": "*",
@@ -55,7 +56,6 @@
     "grunt": "*",
     "grunt-contrib-coffee": "~0.6.7",
     "grunt-contrib-copy": "~0.4.1",
-    "iced-coffee-script": "~1.6.2b",
     "github": "~0.1.8"
   },
   "engines": {
