@@ -2,4 +2,4 @@
 #(cd lib/foo && npm install)
 
 # Install vendor assets with Bower.
-bower install
+./node_modules/bower/bin/bower install
