@@ -50,7 +50,8 @@
     "iced-coffee-script": "~1.6.2b",
     "node-uuid": "~1.4.0",
     "op-tools": "git://github.com/OpenParliamentAu/law-tools.git",
-    "cheerio": "~0.11.0"
+    "cheerio": "~0.11.0",
+    "xtend": "~2.0.3"
   },
   "devDependencies": {
     "mocha": "*",
