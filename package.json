@@ -48,7 +48,8 @@
     "watchr": "~2.4.3",
     "flat-ui-pro": "https://dl.dropboxusercontent.com/s/k55wz1flss1pmw4/flat-ui-pro.tar.gz?token_hash=AAHMbL8hTFac01xbUo7zeRSwUnzWZ5wDIeYvEAaW0Bhu-g",
     "iced-coffee-script": "~1.6.2b",
-    "node-uuid": "~1.4.0"
+    "node-uuid": "~1.4.0",
+    "op-tools": "git://github.com/OpenParliamentAu/law-tools.git"
   },
   "devDependencies": {
     "mocha": "*",
