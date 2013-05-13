@@ -11,6 +11,7 @@
     "jquery-timeago": "~1.1.0",
     "backbone.paginator": "latest",
     "backbone-pageable": "~1.2.3",
-    "debug": "latest"
+    "debug": "latest",
+    "holderjs": "*"
   }
 }

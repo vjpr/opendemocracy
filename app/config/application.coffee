@@ -11,12 +11,11 @@ class @App extends Live.Application
     @enable Live.DefaultLibraries
     #@enable Live.Mongoose
     @enable Live.Sequelize
-    assets = @enable Live.Assets
-    env = assets.getEnvironment()
-    env.appendPath path.join process.cwd(), 'node_modules/Flat-UI'
-    env.appendPath path.join process.cwd(), 'node_modules/flat-ui-pro'
-    #env.registerHelper
-    #  version: -> pjson.version
+    @enable Live.Assets, ->
+      @env.appendPath path.join process.cwd(), 'node_modules/Flat-UI'
+      @env.appendPath path.join process.cwd(), 'node_modules/flat-ui-pro'
+      #@env.registerHelper
+      #  version: -> pjson.version
 
     # Connect logging
     # ---------------
